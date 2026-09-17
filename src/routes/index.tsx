@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import marbleBoardAsset from "@/assets/marmeren-schaakbord.webp.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -51,37 +52,44 @@ function OpenChessReport() {
         </div>
       </nav>
 
-      <main className="relative mx-auto max-w-6xl px-5 sm:px-8">
-        <section className="pb-16 pt-14 sm:pb-24 sm:pt-20">
-          <div className="report-reveal flex items-center gap-3">
-            <span className="size-2 bg-primary" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-soft sm:text-[11px]">Open Chess Alliance</span>
-            <span className="h-px flex-1 bg-border" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-mist sm:text-[11px]">Brussel · 2025</span>
-          </div>
-          <h1 className="report-reveal mt-8 max-w-[19ch] font-serif text-[clamp(2.6rem,7.5vw,5rem)] font-medium leading-[1.02]" style={{ animationDelay: "60ms" }}>
-            Federatieve standaarden voor een <em className="text-primary">soevereine</em> schaakmarkt
-          </h1>
-          <div className="mt-10 grid items-stretch gap-7 sm:grid-cols-12">
-            <p className="report-reveal max-w-[40ch] text-[15px] leading-relaxed text-soft sm:col-span-5" style={{ animationDelay: "120ms" }}>
-              Een neutrale standaardenorganisatie die spelers, platforms en federaties verbindt — zonder hun identiteit, data of autonomie op te sluiten.
+      <section className="relative h-[calc(100svh-5.5rem)] min-h-[500px] max-h-[720px] overflow-hidden bg-ink">
+        <img
+          src={marbleBoardAsset.url}
+          alt="Marmeren schaakbord met klassieke schaakstukken"
+          className="absolute inset-0 size-full object-cover object-[58%_center] sm:object-center"
+          fetchPriority="high"
+        />
+        <div aria-hidden="true" className="absolute inset-0 bg-ink/65" />
+        <div className="relative mx-auto flex h-full max-w-6xl items-end px-5 pb-7 sm:px-8 sm:pb-12">
+          <div className="w-full max-w-4xl text-paper">
+            <div className="report-reveal flex items-center gap-3">
+              <span className="size-2 bg-primary" />
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/70 sm:text-[11px]">00 — Open Chess Alliance</span>
+              <span className="h-px flex-1 bg-paper/20" />
+              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-paper/60 sm:text-[11px]">Brussel · 2025</span>
+            </div>
+            <h1 className="report-reveal mt-5 max-w-[18ch] font-serif text-[clamp(2.5rem,7vw,4.8rem)] font-medium leading-[0.96]" style={{ animationDelay: "60ms" }}>
+              Strategisch rapport: <em className="font-light">de Open Chess Alliance</em>
+            </h1>
+            <p className="report-reveal mt-5 max-w-[52ch] text-[14px] leading-relaxed text-paper/75 sm:text-[16px]" style={{ animationDelay: "120ms" }}>
+              Een blauwdruk voor digitale soevereiniteit en marktcorrectie via federatieve schaakstandaarden.
             </p>
-            <div className="grid grid-cols-3 gap-2 sm:col-span-7 sm:gap-5">
-              {[["Markt 2025", "$3,70 mld"], ["Markt 2032", "$7,64 mld"], ["CAGR", "10,91%"]].map(([label, value], index) => (
-                <div key={label} className="report-frost report-reveal min-w-0 rounded-[3px] px-3 py-4 sm:px-4 sm:py-5" style={{ animationDelay: `${160 + index * 50}ms` }}>
-                  <p className="font-mono text-[8px] uppercase tracking-[0.1em] text-mist sm:text-[10px] sm:tracking-[0.16em]">{label}</p>
-                  <p className={`mt-2 font-serif text-[clamp(1.05rem,3vw,1.65rem)] font-medium ${index === 1 ? "text-primary" : ""}`}>{value}</p>
+            <div className="report-reveal mt-5 flex flex-wrap items-end gap-x-5 gap-y-2 border-t border-paper/20 pt-4" style={{ animationDelay: "180ms" }}>
+              {[["2025", "$3,70 mld"], ["2032", "$7,64 mld"], ["CAGR", "10,91%"]].map(([label, value]) => (
+                <div key={label} className="flex items-baseline gap-2">
+                  <span className="font-serif text-lg font-medium sm:text-xl">{value}</span>
+                  <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-paper/50">{label}</span>
                 </div>
               ))}
+              <a href="#diagnose" className="ml-auto hidden items-center gap-2 border-b border-paper/40 pb-1 text-[12px] font-medium text-paper transition-colors hover:border-paper focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary sm:inline-flex">
+                Start lezen <span aria-hidden="true" className="font-mono">↓</span>
+              </a>
             </div>
           </div>
-          <div className="report-reveal mt-10 flex flex-wrap items-center gap-4" style={{ animationDelay: "330ms" }}>
-            <a href="#diagnose" className="inline-flex items-center gap-3 rounded-[3px] bg-ink px-5 py-3 text-sm font-medium text-paper transition-colors hover:bg-soft focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
-              Verken het rapport <span aria-hidden="true" className="font-mono">→</span>
-            </a>
-            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-mist">10 hoofdstukken · EU-context · open standaard</span>
-          </div>
-        </section>
+        </div>
+      </section>
+
+      <main className="relative mx-auto max-w-6xl px-5 sm:px-8">
 
         <section id="diagnose" className="scroll-mt-14 border-t border-border py-16 sm:py-24">
           <div className="grid gap-8 sm:grid-cols-12">
