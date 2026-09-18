@@ -27,7 +27,91 @@ const chapters = [
 ] as const;
 
 function SectionLabel({ number, children }: { number: string; children: React.ReactNode }) {
-  return <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">{number} — {children}</p>;
+  return (
+    <p className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
+      <span aria-hidden="true" className="inline-block size-1.5 bg-primary" />
+      {number} — {children}
+    </p>
+  );
+}
+
+function useReadingState() {
+  const [progress, setProgress] = useState(0);
+  const [active, setActive] = useState<string>("");
+
+  useEffect(() => {
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0);
+      const mid = window.innerHeight * 0.35;
+      let current = "";
+      for (const [, , id] of chapters) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= mid) current = id;
+      }
+      setActive(current);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  return { progress, active };
+}
+
+function ReportHeader() {
+  const { progress, active } = useReadingState();
+
+  return (
+    <header className="sticky top-0 z-40">
+      <nav aria-label="Hoofdstukken" className="report-frost border-b border-border">
+        <div className="mx-auto flex h-[3.75rem] max-w-6xl items-center gap-4 px-5 sm:gap-7 sm:px-8">
+          <a
+            href="#top"
+            className="flex shrink-0 items-center gap-2.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+          >
+            <span aria-hidden="true" className="grid size-6 grid-cols-2 grid-rows-2 overflow-hidden rounded-[2px] ring-1 ring-inset ring-ink/20">
+              <span className="bg-ink" />
+              <span className="bg-transparent" />
+              <span className="bg-transparent" />
+              <span className="bg-ink" />
+            </span>
+            <span className="flex flex-col leading-none">
+              <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink">OCA</span>
+              <span className="mt-1 hidden font-mono text-[9px] uppercase tracking-[0.16em] text-mist sm:inline">Strategisch rapport</span>
+            </span>
+          </a>
+          <div className="no-scrollbar ml-auto flex items-center gap-4 overflow-x-auto sm:gap-5">
+            {chapters.map(([number, label, id]) => {
+              const isActive = active === id;
+              return (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  aria-current={isActive ? "true" : undefined}
+                  className="group relative flex shrink-0 items-baseline gap-1.5 py-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                >
+                  <span className={`font-mono text-[10px] transition-colors ${isActive ? "text-primary" : "text-mist"}`}>{number}</span>
+                  <span className={`text-[12px] font-medium transition-colors ${isActive ? "text-ink" : "text-soft group-hover:text-ink"}`}>{label}</span>
+                  <span
+                    aria-hidden="true"
+                    className={`absolute -bottom-0.5 left-0 h-px w-full origin-left bg-primary transition-transform duration-300 ${isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  />
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </nav>
+      <div aria-hidden="true" className="h-px w-full bg-border">
+        <div className="h-px origin-left bg-primary transition-transform duration-150" style={{ transform: `scaleX(${progress})` }} />
+      </div>
+    </header>
+  );
 }
 
 function OpenChessReport() {
