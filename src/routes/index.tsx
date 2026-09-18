@@ -283,10 +283,56 @@ function OpenChessReport() {
         </section>
       </main>
 
-      <footer className="relative border-t border-border">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-10 sm:flex-row sm:items-center sm:px-8">
-          <div className="flex items-baseline gap-2"><span className="font-mono text-[11px] uppercase tracking-[0.18em] text-primary">OCA</span><span className="font-serif text-[15px] font-medium">De tijd van de federatie begint.</span></div>
-          <div className="flex flex-wrap gap-x-6 gap-y-2 sm:ml-auto"><a href="#top" className="font-mono text-[10px] uppercase tracking-[0.14em] text-soft hover:text-ink">Naar boven ↑</a><span className="font-mono text-[10px] uppercase tracking-[0.14em] text-mist">Brussel · Strategisch rapport 2025</span></div>
+      <footer className="relative bg-ink text-paper">
+        <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
+          <div className="grid gap-10 sm:grid-cols-12">
+            <div className="sm:col-span-7">
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/45">Slotwoord</p>
+              <p className="mt-5 max-w-[20ch] font-serif text-[clamp(1.9rem,5vw,3rem)] font-medium leading-[1.05]">
+                De tijd van de federatie <em className="font-light">begint.</em>
+              </p>
+              <p className="mt-5 max-w-[46ch] text-[14px] leading-relaxed text-paper/60">
+                Een neutrale standaard verdringt geen platform. Ze geeft spelers hun identiteit terug en maakt de markt opnieuw open.
+              </p>
+            </div>
+            <div className="grid gap-8 sm:col-span-5 sm:grid-cols-2">
+              <div>
+                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-paper/40">Colofon</p>
+                <ul className="mt-4 space-y-1.5 text-[13px] text-paper/70">
+                  <li>Open Chess Alliance</li>
+                  <li>Brussel, België</li>
+                  <li>Strategisch rapport 2025</li>
+                </ul>
+              </div>
+              <div>
+                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-paper/40">Hoofdstukken</p>
+                <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-1.5 sm:grid-cols-1">
+                  {chapters.map(([number, label, id]) => (
+                    <li key={id}>
+                      <a href={`#${id}`} className="inline-flex items-baseline gap-2 text-[13px] text-paper/70 transition-colors hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
+                        <span className="font-mono text-[9px] text-paper/35">{number}</span>
+                        {label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-paper/15 pt-6">
+            <div className="flex items-center gap-2.5">
+              <span aria-hidden="true" className="grid size-5 grid-cols-2 grid-rows-2 overflow-hidden rounded-[2px] ring-1 ring-inset ring-paper/25">
+                <span className="bg-paper" />
+                <span />
+                <span />
+                <span className="bg-paper" />
+              </span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/60">OCA · Standaarden</span>
+            </div>
+            <a href="#top" className="ml-auto font-mono text-[10px] uppercase tracking-[0.16em] text-paper/60 transition-colors hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
+              Naar boven ↑
+            </a>
+          </div>
         </div>
       </footer>
     </div>
