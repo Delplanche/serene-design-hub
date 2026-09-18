@@ -231,6 +231,17 @@ function OpenChessReport() {
           </div>
         </section>
 
+        <aside className="relative -mx-5 bg-ink px-5 py-14 text-paper sm:-mx-8 sm:px-8 sm:py-20">
+          <div className="grid gap-6 sm:grid-cols-12 sm:items-end">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/45 sm:col-span-3">Uitgangspunt</p>
+            <blockquote className="sm:col-span-9">
+              <p className="max-w-[26ch] font-serif text-[clamp(1.6rem,3.6vw,2.6rem)] font-medium leading-[1.12]">
+                Wie de identiteit bezit, bezit de markt. <em className="font-light italic text-paper/70">Daarom hoort ze bij de speler.</em>
+              </p>
+            </blockquote>
+          </div>
+        </aside>
+
         <section className="grid scroll-mt-20 gap-10 border-t border-border py-16 md:grid-cols-2 md:gap-8 sm:py-24">
           <div id="rating" className="scroll-mt-20">
             <SectionLabel number="04">Universele rating</SectionLabel>
