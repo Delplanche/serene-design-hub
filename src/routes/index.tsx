@@ -232,8 +232,8 @@ function OpenChessReport() {
         </section>
 
         <aside className="relative -mx-5 bg-ink px-5 py-14 text-paper sm:-mx-8 sm:px-8 sm:py-20">
-          <div className="grid gap-6 sm:grid-cols-12 sm:items-end">
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/45 sm:col-span-3">Uitgangspunt</p>
+          <div className="grid gap-6 sm:grid-cols-12 sm:items-start">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/45 sm:col-span-3 sm:pt-3">Uitgangspunt</p>
             <blockquote className="sm:col-span-9">
               <p className="max-w-[26ch] font-serif text-[clamp(1.6rem,3.6vw,2.6rem)] font-medium leading-[1.12]">
                 Wie de identiteit bezit, bezit de markt. <em className="font-light italic text-paper/70">Daarom hoort ze bij de speler.</em>
