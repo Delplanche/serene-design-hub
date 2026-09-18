@@ -118,24 +118,8 @@ function OpenChessReport() {
   return (
     <div id="top" className="relative min-h-screen overflow-hidden bg-paper font-sans text-ink antialiased">
       <div aria-hidden="true" className="report-grid pointer-events-none fixed inset-0 opacity-60" />
-      <div aria-hidden="true" className="pointer-events-none fixed inset-x-0 top-0 z-50 h-px bg-primary/50" />
+      <ReportHeader />
 
-      <nav aria-label="Hoofdstukken" className="report-frost sticky top-0 z-40 border-b border-border">
-        <div className="mx-auto flex h-14 max-w-6xl items-center gap-5 px-5 sm:px-8">
-          <a href="#top" className="flex shrink-0 items-baseline gap-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
-            <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-primary">OCA</span>
-            <span className="hidden font-serif text-[15px] font-medium sm:inline">Standaarden</span>
-          </a>
-          <div className="no-scrollbar ml-auto flex items-center gap-4 overflow-x-auto">
-            {chapters.map(([number, label, id]) => (
-              <a key={id} href={`#${id}`} className="group flex shrink-0 items-baseline gap-1.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
-                <span className="font-mono text-[10px] text-mist">{number}</span>
-                <span className="text-[12px] font-medium text-soft transition-colors group-hover:text-ink">{label}</span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </nav>
 
       <section className="relative h-[calc(100svh-5.5rem)] min-h-[500px] max-h-[720px] overflow-hidden bg-ink">
         <img
