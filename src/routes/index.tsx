@@ -128,31 +128,35 @@ function OpenChessReport() {
           className="absolute inset-0 size-full object-cover object-[58%_center] sm:object-center"
           fetchPriority="high"
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-ink/65" />
-        <div className="relative mx-auto flex h-full max-w-6xl items-end px-5 pb-7 sm:px-8 sm:pb-12">
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink via-ink/75 to-ink/35" />
+        <div className="relative mx-auto flex h-full max-w-6xl items-end px-5 pb-8 sm:px-8 sm:pb-14">
           <div className="w-full max-w-4xl text-paper">
             <div className="report-reveal flex items-center gap-3">
-              <span className="size-2 bg-primary" />
+              <span className="size-1.5 bg-primary" />
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/70 sm:text-[11px]">00 — Open Chess Alliance</span>
               <span className="h-px flex-1 bg-paper/20" />
-              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-paper/60 sm:text-[11px]">Brussel · 2025</span>
+              <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-paper/60 sm:inline sm:text-[11px]">Brussel · 2025</span>
             </div>
-            <h1 className="report-reveal mt-5 max-w-[18ch] font-serif text-[clamp(2.5rem,7vw,4.8rem)] font-medium leading-[0.96]" style={{ animationDelay: "60ms" }}>
-              Strategisch rapport: <em className="font-light">de Open Chess Alliance</em>
+            <h1 className="report-reveal mt-6 max-w-[17ch] font-serif text-[clamp(2.4rem,7vw,4.8rem)] font-medium leading-[0.98] tracking-[-0.01em]" style={{ animationDelay: "60ms" }}>
+              Strategisch rapport: <em className="font-light italic">de Open Chess Alliance</em>
             </h1>
-            <p className="report-reveal mt-5 max-w-[52ch] text-[14px] leading-relaxed text-paper/75 sm:text-[16px]" style={{ animationDelay: "120ms" }}>
+            <p className="report-reveal mt-6 max-w-[48ch] text-[14px] leading-relaxed text-paper/70 sm:text-[16px]" style={{ animationDelay: "120ms" }}>
               Een blauwdruk voor digitale soevereiniteit en marktcorrectie via federatieve schaakstandaarden.
             </p>
-            <div className="report-reveal mt-5 flex flex-wrap items-end gap-x-5 gap-y-2 border-t border-paper/20 pt-4" style={{ animationDelay: "180ms" }}>
-              {[["2025", "$3,70 mld"], ["2032", "$7,64 mld"], ["CAGR", "10,91%"]].map(([label, value]) => (
-                <div key={label} className="flex items-baseline gap-2">
-                  <span className="font-serif text-lg font-medium sm:text-xl">{value}</span>
-                  <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-paper/50">{label}</span>
-                </div>
-              ))}
-              <a href="#diagnose" className="ml-auto hidden items-center gap-2 border-b border-paper/40 pb-1 text-[12px] font-medium text-paper transition-colors hover:border-paper focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary sm:inline-flex">
-                Start lezen <span aria-hidden="true" className="font-mono">↓</span>
-              </a>
+            <div className="report-reveal mt-7 border-t border-paper/20 pt-5" style={{ animationDelay: "180ms" }}>
+              <div className="flex flex-wrap items-end gap-y-4">
+                <dl className="grid flex-1 grid-cols-3 gap-x-4">
+                  {[["Markt 2025", "$3,70 mld"], ["Prognose 2032", "$7,64 mld"], ["Groei CAGR", "10,91%"]].map(([label, value]) => (
+                    <div key={label} className="border-l border-paper/15 pl-3 first:border-l-0 first:pl-0">
+                      <dt className="font-mono text-[9px] uppercase tracking-[0.14em] text-paper/45">{label}</dt>
+                      <dd className="mt-1.5 font-serif text-lg font-medium leading-none sm:text-2xl">{value}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <a href="#diagnose" className="group ml-auto hidden items-center gap-2 border border-paper/25 px-4 py-2.5 text-[12px] font-medium text-paper transition-colors hover:border-paper/70 hover:bg-paper/5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary sm:inline-flex">
+                  Start lezen <span aria-hidden="true" className="font-mono transition-transform group-hover:translate-y-0.5">↓</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -226,6 +230,17 @@ function OpenChessReport() {
             </div>
           </div>
         </section>
+
+        <aside className="relative -mx-5 bg-ink px-5 py-14 text-paper sm:-mx-8 sm:px-8 sm:py-20">
+          <div className="grid gap-6 sm:grid-cols-12 sm:items-start">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/45 sm:col-span-3 sm:pt-3">Uitgangspunt</p>
+            <blockquote className="sm:col-span-9">
+              <p className="max-w-[26ch] font-serif text-[clamp(1.6rem,3.6vw,2.6rem)] font-medium leading-[1.12]">
+                Wie de identiteit bezit, bezit de markt. <em className="font-light italic text-paper/70">Daarom hoort ze bij de speler.</em>
+              </p>
+            </blockquote>
+          </div>
+        </aside>
 
         <section className="grid scroll-mt-20 gap-10 border-t border-border py-16 md:grid-cols-2 md:gap-8 sm:py-24">
           <div id="rating" className="scroll-mt-20">
