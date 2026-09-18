@@ -228,7 +228,7 @@ function OpenChessReport() {
         </section>
 
         <section className="grid scroll-mt-20 gap-10 border-t border-border py-16 md:grid-cols-2 md:gap-8 sm:py-24">
-          <div id="rating" className="scroll-mt-16">
+          <div id="rating" className="scroll-mt-20">
             <SectionLabel number="04">Universele rating</SectionLabel>
             <h2 className="mt-4 font-serif text-3xl font-medium leading-tight">Eén nieuwe, vergelijkbare waarheid</h2>
             <p className="mt-4 max-w-[42ch] text-[15px] leading-relaxed text-soft">De OCA Rating probeert bestaande cijfers niet cosmetisch te vertalen. Ze bouwt een transparante standaard uit resultaten binnen het federatieve netwerk.</p>
