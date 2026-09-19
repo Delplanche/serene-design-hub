@@ -150,10 +150,11 @@ function OpenChessReport() {
         <img
           src={marbleBoardAsset.url}
           alt="Marmeren schaakbord met klassieke schaakstukken"
-          className="absolute inset-0 size-full object-cover object-[58%_center] sm:object-center"
+          className="report-cover-img absolute inset-0 size-full object-cover object-[58%_center] sm:object-center"
           fetchPriority="high"
         />
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink via-ink/75 to-ink/35" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(120%_85%_at_50%_15%,transparent_35%,color-mix(in_oklab,var(--ink)_78%,transparent)_100%)]" />
         <div className="relative mx-auto flex h-full max-w-6xl items-end px-5 pb-8 sm:px-8 sm:pb-14">
           <div className="w-full max-w-4xl text-paper">
             <div className="report-reveal flex items-center gap-3">
@@ -226,7 +227,7 @@ function OpenChessReport() {
               ["Neutrale kern", "OCA-standaard", "Identiteit, rating en integriteit zonder lock-in."],
               ["Commercie & legitimiteit", "ChessBase + FIDE", "Professionele gebruikers, historische data en officiële erkenning."],
             ].map(([label, title, text], index) => (
-              <article key={title} className={`report-frost rounded-[3px] p-5 ${index === 1 ? "ring-1 ring-inset ring-primary/25" : ""}`}>
+              <article key={title} className={`report-frost report-lift rounded-[3px] p-5 ${index === 1 ? "ring-1 ring-inset ring-primary/25" : ""}`}>
                 <p className={`font-mono text-[10px] uppercase tracking-[0.14em] ${index === 1 ? "text-primary" : "text-mist"}`}>{label}</p>
                 <h3 className="mt-2 font-serif text-xl font-medium">{title}</h3>
                 <p className="mt-2 text-[13px] leading-relaxed text-soft">{text}</p>
@@ -247,7 +248,7 @@ function OpenChessReport() {
             </div>
             <div className="grid grid-cols-2 gap-3">
               {[["Identiteit", "Federatief en verifieerbaar."], ["Historie", "Vrij exporteerbaar en synchroniseerbaar."], ["Toestemming", "Specifiek, inzichtelijk en intrekbaar."], ["Eigenaarschap", "De speler is de bron van vertrouwen."]].map(([title, text], index) => (
-                <div key={title} className={`report-frost rounded-[3px] p-4 sm:p-5 ${index === 3 ? "ring-1 ring-inset ring-primary/25" : ""}`}>
+                <div key={title} className={`report-frost report-lift rounded-[3px] p-4 sm:p-5 ${index === 3 ? "ring-1 ring-inset ring-primary/25" : ""}`}>
                   <p className={`font-mono text-[9px] uppercase tracking-[0.14em] ${index === 3 ? "text-primary" : "text-mist"}`}>{title}</p>
                   <p className="mt-2 text-[13px] leading-relaxed text-soft">{text}</p>
                 </div>
@@ -297,7 +298,7 @@ function OpenChessReport() {
             <h2 className="max-w-[20ch] font-serif text-3xl font-medium leading-tight sm:col-span-5 sm:text-4xl">Van digitaal protocol naar publiek netwerk</h2>
             <div className="grid gap-px overflow-hidden rounded-[3px] border border-border bg-border sm:col-span-7 sm:grid-cols-3">
               {[["Bibliotheken", "Schaakclub in een Doos voor digitale inclusie en lokale ontmoeting."], ["Zorg", "Toegankelijke schaakprogramma’s voor cognitieve gezondheid en verbinding."], ["Europa", "Aansluiting op digitale soevereiniteit, DMA en publieke R&D-financiering."]].map(([title, text]) => (
-                <article key={title} className="bg-paper p-5"><h3 className="font-serif text-lg font-medium">{title}</h3><p className="mt-3 text-[13px] leading-relaxed text-soft">{text}</p></article>
+                <article key={title} className="bg-paper p-5 transition-colors hover:bg-linen/60"><h3 className="font-serif text-lg font-medium">{title}</h3><p className="mt-3 text-[13px] leading-relaxed text-soft">{text}</p></article>
               ))}
             </div>
           </div>
