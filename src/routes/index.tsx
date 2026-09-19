@@ -155,7 +155,6 @@ function OpenChessReport() {
         />
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink via-ink/75 to-ink/35" />
         <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(120%_85%_at_50%_15%,transparent_35%,color-mix(in_oklab,var(--ink)_78%,transparent)_100%)]" />
-        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-paper/0" />
         <div className="relative mx-auto flex h-full max-w-6xl items-end px-5 pb-8 sm:px-8 sm:pb-14">
           <div className="w-full max-w-4xl text-paper">
             <div className="report-reveal flex items-center gap-3">
