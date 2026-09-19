@@ -256,7 +256,7 @@ function OpenChessReport() {
           </div>
         </section>
 
-        <aside className="relative -mx-5 bg-ink px-5 py-14 text-paper sm:-mx-8 sm:px-8 sm:py-20">
+        <aside data-reveal className="relative -mx-5 bg-ink px-5 py-14 text-paper sm:-mx-8 sm:px-8 sm:py-20">
           <div className="grid gap-6 sm:grid-cols-12 sm:items-start">
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/45 sm:col-span-3 sm:pt-3">Uitgangspunt</p>
             <blockquote className="sm:col-span-9">
