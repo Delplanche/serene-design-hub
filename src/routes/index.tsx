@@ -63,6 +63,29 @@ function useReadingState() {
   return { progress, active };
 }
 
+function useScrollReveal() {
+  useEffect(() => {
+    const els = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+    if (!("IntersectionObserver" in window) || els.length === 0) {
+      els.forEach((el) => el.classList.add("is-inview"));
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-inview");
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { rootMargin: "0px 0px -12% 0px", threshold: 0.08 },
+    );
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+}
+
 function ReportHeader() {
   const { progress, active } = useReadingState();
 
@@ -115,6 +138,8 @@ function ReportHeader() {
 }
 
 function OpenChessReport() {
+  useScrollReveal();
+
   return (
     <div id="top" className="relative min-h-screen overflow-hidden bg-paper font-sans text-ink antialiased">
       <div aria-hidden="true" className="report-grid pointer-events-none fixed inset-0 opacity-60" />
