@@ -159,11 +159,22 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     letter-spacing: 0;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
   }
 
   html { scroll-behavior: smooth; }
 
+  h1, h2, h3 {
+    font-optical-sizing: auto;
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
   ::selection { background: color-mix(in oklab, var(--primary) 20%, transparent); }
+
+  :focus-visible { outline-color: var(--primary); }
 }
 
 @utility report-grid {
@@ -177,6 +188,29 @@
   background: var(--frost);
   backdrop-filter: blur(14px);
   box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--ink) 6%, transparent);
+  transition:
+    background 0.4s ease,
+    box-shadow 0.4s ease,
+    transform 0.4s cubic-bezier(.2,.7,.2,1);
+}
+
+@utility report-lift {
+  &:hover {
+    background: color-mix(in oklab, var(--paper) 92%, white);
+    box-shadow:
+      inset 0 0 0 1px color-mix(in oklab, var(--ink) 14%, transparent),
+      0 12px 30px -22px color-mix(in oklab, var(--ink) 70%, transparent);
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes report-cover-in {
+  from { transform: scale(1.06); }
+  to { transform: scale(1); }
+}
+
+@utility report-cover-img {
+  animation: report-cover-in 2.4s cubic-bezier(.2,.7,.2,1) both;
 }
 
 @utility no-scrollbar {
@@ -195,7 +229,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .report-reveal { animation: none; }
+  .report-reveal,
+  .report-cover-img { animation: none; }
+  .report-lift:hover { transform: none; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
