@@ -189,7 +189,7 @@ function OpenChessReport() {
 
       <main className="relative mx-auto max-w-6xl px-5 sm:px-8">
 
-        <section id="diagnose" className="scroll-mt-20 border-t border-border py-16 sm:py-24">
+        <section id="diagnose" data-reveal className="scroll-mt-20 border-t border-border py-16 sm:py-24">
           <div className="grid gap-8 sm:grid-cols-12">
             <div className="sm:col-span-4">
               <SectionLabel number="01">Diagnose</SectionLabel>
@@ -217,7 +217,7 @@ function OpenChessReport() {
           </div>
         </section>
 
-        <section id="protocol" className="scroll-mt-20 border-t border-border py-16 sm:py-24">
+        <section id="protocol" data-reveal className="scroll-mt-20 border-t border-border py-16 sm:py-24">
           <SectionLabel number="02">Alliantieprotocol</SectionLabel>
           <h2 className="mt-4 max-w-[24ch] font-serif text-3xl font-medium leading-tight sm:text-4xl">Een gemeenschappelijke standaard tussen bestaande spelers</h2>
           <div className="mt-10 grid gap-3 sm:grid-cols-3">
@@ -238,7 +238,7 @@ function OpenChessReport() {
           </div>
         </section>
 
-        <section id="identiteit" className="scroll-mt-20 border-t border-border py-16 sm:py-24">
+        <section id="identiteit" data-reveal className="scroll-mt-20 border-t border-border py-16 sm:py-24">
           <div className="grid items-start gap-8 sm:grid-cols-2">
             <div>
               <SectionLabel number="03">Digitale soevereiniteit</SectionLabel>
@@ -267,7 +267,7 @@ function OpenChessReport() {
           </div>
         </aside>
 
-        <section className="grid scroll-mt-20 gap-10 border-t border-border py-16 md:grid-cols-2 md:gap-8 sm:py-24">
+        <section data-reveal className="grid scroll-mt-20 gap-10 border-t border-border py-16 md:grid-cols-2 md:gap-8 sm:py-24">
           <div id="rating" className="scroll-mt-20">
             <SectionLabel number="04">Universele rating</SectionLabel>
             <h2 className="mt-4 font-serif text-3xl font-medium leading-tight">Eén nieuwe, vergelijkbare waarheid</h2>
@@ -280,7 +280,7 @@ function OpenChessReport() {
               ))}
             </div>
           </div>
-          <div id="integriteit" className="scroll-mt-16 md:border-l md:border-border md:pl-8">
+          <div id="integriteit" className="scroll-mt-20 md:border-l md:border-border md:pl-8">
             <SectionLabel number="05">Collectieve integriteit</SectionLabel>
             <h2 className="mt-4 font-serif text-3xl font-medium leading-tight">Gedeelde signalen. Onafhankelijk beroep.</h2>
             <p className="mt-4 max-w-[42ch] text-[15px] leading-relaxed text-soft">Onafhankelijke detectiemodules delen signalen. Pas na consensus volgt een netwerkbrede maatregel, met een Fair Play Commissie voor transparant beroep.</p>
@@ -291,7 +291,7 @@ function OpenChessReport() {
           </div>
         </section>
 
-        <section id="uitrol" className="scroll-mt-20 border-t border-border py-16 sm:py-24">
+        <section id="uitrol" data-reveal className="scroll-mt-20 border-t border-border py-16 sm:py-24">
           <SectionLabel number="06">Institutionele uitrol</SectionLabel>
           <div className="mt-4 grid gap-8 sm:grid-cols-12">
             <h2 className="max-w-[20ch] font-serif text-3xl font-medium leading-tight sm:col-span-5 sm:text-4xl">Van digitaal protocol naar publiek netwerk</h2>
@@ -303,7 +303,7 @@ function OpenChessReport() {
           </div>
         </section>
 
-        <section id="roadmap" className="scroll-mt-20 border-t border-border py-16 sm:py-24">
+        <section id="roadmap" data-reveal className="scroll-mt-20 border-t border-border py-16 sm:py-24">
           <SectionLabel number="07">Vierfasen-roadmap</SectionLabel>
           <h2 className="mt-4 max-w-[24ch] font-serif text-3xl font-medium leading-tight sm:text-4xl">Van oprichting naar een wereldwijde standaard</h2>
           <ol className="relative mt-10 space-y-7 border-l border-border pl-8 sm:pl-10">
