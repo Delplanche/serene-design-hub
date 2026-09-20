@@ -1,6 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import marbleBoardAsset from "@/assets/marmeren-schaakbord.webp.asset.json";
+import { useServerFn } from "@tanstack/react-start";
+import { LoaderCircle, MessageCircle, Send } from "lucide-react";
+import { useEffect, useState, type FormEvent } from "react";
+import marbleBoardUrl from "@/assets/marmeren-schaakbord.webp";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { askReportQuestion } from "@/lib/report-assistant.functions";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,6 +29,7 @@ const chapters = [
   ["05", "Integriteit", "integriteit"],
   ["06", "Uitrol", "uitrol"],
   ["07", "Roadmap", "roadmap"],
+  ["08", "Vraag AI", "vraag"],
 ] as const;
 
 function SectionLabel({ number, children }: { number: string; children: React.ReactNode }) {
@@ -137,6 +143,86 @@ function ReportHeader() {
   );
 }
 
+function ReportAssistant() {
+  const askQuestion = useServerFn(askReportQuestion);
+  const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [isAsking, setIsAsking] = useState(false);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const normalizedQuestion = question.trim();
+    if (normalizedQuestion.length < 3 || isAsking) return;
+    setIsAsking(true);
+    setAnswer(null);
+    setError(null);
+    try {
+      const result = await askQuestion({ data: { question: normalizedQuestion } });
+      setAnswer(result.answer);
+      setError(result.error);
+    } catch {
+      setError("De vraag kon niet worden verzonden. Probeer het later opnieuw.");
+    } finally {
+      setIsAsking(false);
+    }
+  }
+
+  return (
+    <section id="vraag" data-reveal className="scroll-mt-20 border-t border-paper/12 bg-ink py-16 text-paper sm:py-24">
+      <div className="grid gap-10 sm:grid-cols-12 sm:gap-8">
+        <div className="sm:col-span-4">
+          <p className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
+            <span aria-hidden="true" className="inline-block size-1.5 bg-primary" />
+            08 — Rapportassistent
+          </p>
+          <h2 className="mt-4 max-w-[18ch] font-serif text-3xl font-medium leading-tight sm:text-4xl">Vraag door op het rapport</h2>
+          <p className="mt-4 max-w-[40ch] text-[14px] leading-relaxed text-paper/65">
+            Stel een vrije vraag. Het antwoord blijft binnen de inhoud en benoemt wat het rapport niet specificeert.
+          </p>
+        </div>
+        <div className="sm:col-span-8">
+          <form onSubmit={handleSubmit} className="border-y border-paper/14 py-5 sm:py-7">
+            <label htmlFor="report-question" className="font-mono text-[10px] uppercase tracking-[0.16em] text-paper/50">
+              Uw vraag
+            </label>
+            <Textarea
+              id="report-question"
+              value={question}
+              onChange={(event) => setQuestion(event.target.value)}
+              placeholder="Bijvoorbeeld: hoe bewaart OCA het eigenaarschap van spelersdata?"
+              maxLength={500}
+              rows={3}
+              disabled={isAsking}
+              className="mt-3 min-h-28 resize-y rounded-[3px] border-paper/18 bg-paper/[0.035] px-4 py-3 text-[15px] leading-relaxed text-paper shadow-none placeholder:text-paper/35 focus-visible:ring-primary"
+            />
+            <div className="mt-3 flex items-center justify-between gap-4">
+              <span className="font-mono text-[9px] text-paper/35">{question.length}/500</span>
+              <Button type="submit" disabled={question.trim().length < 3 || isAsking} className="rounded-[3px] bg-paper px-4 text-ink shadow-none hover:bg-paper/90">
+                {isAsking ? <LoaderCircle aria-hidden="true" className="animate-spin" /> : <Send aria-hidden="true" />}
+                {isAsking ? "Antwoord formuleren" : "Vraag stellen"}
+              </Button>
+            </div>
+          </form>
+
+          <div aria-live="polite" aria-busy={isAsking} className="min-h-16 pt-6">
+            {isAsking && (
+              <p className="flex items-center gap-2 text-[14px] text-paper/60"><LoaderCircle aria-hidden="true" className="size-4 animate-spin text-primary" />Het rapport wordt geraadpleegd…</p>
+            )}
+            {error && <p role="alert" className="border-l-2 border-destructive pl-4 text-[14px] leading-relaxed text-paper/80">{error}</p>}
+            {answer && (
+              <div className="grid gap-4 sm:grid-cols-[auto_1fr]">
+                <MessageCircle aria-hidden="true" className="mt-1 size-5 text-primary" />
+                <p className="max-w-[62ch] whitespace-pre-wrap font-serif text-lg leading-relaxed text-paper/90 sm:text-xl">{answer}</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function OpenChessReport() {
   useScrollReveal();
 
@@ -148,7 +234,7 @@ function OpenChessReport() {
 
       <section className="relative h-[calc(100svh-5.5rem)] min-h-[500px] max-h-[720px] overflow-hidden bg-ink">
         <img
-          src={marbleBoardAsset.url}
+          src={marbleBoardUrl}
           alt="Marmeren schaakbord met klassieke schaakstukken"
           className="report-cover-img absolute inset-0 size-full object-cover object-[58%_center] sm:object-center"
           fetchPriority="high"
@@ -322,57 +408,21 @@ function OpenChessReport() {
             ))}
           </ol>
         </section>
+
+        <ReportAssistant />
       </main>
 
       <footer className="relative bg-ink text-paper">
-        <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
-          <div className="grid gap-10 sm:grid-cols-12">
-            <div className="sm:col-span-7">
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/45">Slotwoord</p>
-              <p className="mt-5 max-w-[20ch] font-serif text-[clamp(1.9rem,5vw,3rem)] font-medium leading-[1.05]">
-                De tijd van de federatie <em className="font-light">begint.</em>
-              </p>
-              <p className="mt-5 max-w-[46ch] text-[14px] leading-relaxed text-paper/60">
-                Een neutrale standaard verdringt geen platform. Ze geeft spelers hun identiteit terug en maakt de markt opnieuw open.
-              </p>
-            </div>
-            <div className="grid gap-8 sm:col-span-5 sm:grid-cols-2">
-              <div>
-                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-paper/40">Colofon</p>
-                <ul className="mt-4 space-y-1.5 text-[13px] text-paper/70">
-                  <li>Open Chess Alliance</li>
-                  <li>Brussel, België</li>
-                  <li>Strategisch rapport 2025</li>
-                </ul>
-              </div>
-              <div>
-                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-paper/40">Hoofdstukken</p>
-                <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-1.5 sm:grid-cols-1">
-                  {chapters.map(([number, label, id]) => (
-                    <li key={id}>
-                      <a href={`#${id}`} className="inline-flex items-baseline gap-2 text-[13px] text-paper/70 transition-colors hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
-                        <span className="font-mono text-[9px] text-paper/35">{number}</span>
-                        {label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+        <div className="mx-auto flex max-w-6xl flex-col gap-5 border-t border-paper/14 px-5 py-8 sm:flex-row sm:items-center sm:px-8">
+          <div className="flex items-center gap-2.5">
+            <span aria-hidden="true" className="grid size-5 shrink-0 grid-cols-2 grid-rows-2 overflow-hidden rounded-[2px] ring-1 ring-inset ring-paper/25">
+              <span className="bg-paper" /><span /><span /><span className="bg-paper" />
+            </span>
+            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-paper/55">Open Chess Alliance · Brussel · 2025</p>
           </div>
-          <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-paper/15 pt-6">
-            <div className="flex items-center gap-2.5">
-              <span aria-hidden="true" className="grid size-5 grid-cols-2 grid-rows-2 overflow-hidden rounded-[2px] ring-1 ring-inset ring-paper/25">
-                <span className="bg-paper" />
-                <span />
-                <span />
-                <span className="bg-paper" />
-              </span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/60">OCA · Standaarden</span>
-            </div>
-            <a href="#top" className="ml-auto font-mono text-[10px] uppercase tracking-[0.16em] text-paper/60 transition-colors hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
-              Naar boven ↑
-            </a>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 sm:ml-auto sm:justify-end">
+            <p className="text-[12px] text-paper/55">Architectuur &amp; Platform door <a href="https://delplanche.cloud" target="_blank" rel="noreferrer" className="text-paper/85 underline decoration-paper/25 underline-offset-4 transition-colors hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">Delplanche</a></p>
+            <a href="#top" className="font-mono text-[10px] uppercase tracking-[0.14em] text-paper/55 transition-colors hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">Naar boven ↑</a>
           </div>
         </div>
       </footer>
