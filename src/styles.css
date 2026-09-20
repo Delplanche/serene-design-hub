@@ -73,12 +73,12 @@
 
 :root {
   --radius: 0.25rem;
-  --paper: oklch(0.946 0.018 83.2);
-  --linen: oklch(0.9 0.025 82.1);
-  --stone: oklch(0.856 0.028 80.4);
-  --ink: oklch(0.213 0.006 102.4);
-  --soft: oklch(0.402 0.011 91.2);
-  --mist: oklch(0.607 0.019 82.4);
+  --paper: oklch(0.955 0.012 83.2);
+  --linen: oklch(0.915 0.017 82.1);
+  --stone: oklch(0.866 0.018 80.4);
+  --ink: oklch(0.205 0.006 285.9);
+  --soft: oklch(0.39 0.009 285.8);
+  --mist: oklch(0.585 0.012 285.7);
   --frost: oklch(0.946 0.018 83.2 / 0.75);
   --background: var(--paper);
   --foreground: var(--ink);
@@ -96,8 +96,8 @@
   --accent-foreground: var(--paper);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.213 0.006 102.4 / 0.12);
-  --input: oklch(0.213 0.006 102.4 / 0.16);
+  --border: oklch(0.205 0.006 285.9 / 0.13);
+  --input: oklch(0.205 0.006 285.9 / 0.18);
   --ring: var(--primary);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);

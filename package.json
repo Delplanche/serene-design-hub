@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
+    "check:images": "node scripts/check-local-images.mjs",
+    "prebuild": "bun run check:images",
     "build": "vite build",
+    "prebuild:dev": "bun run check:images",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
