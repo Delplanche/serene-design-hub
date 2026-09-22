@@ -205,7 +205,7 @@ function ReportAssistant() {
             </div>
           </form>
 
-          <div aria-live="polite" aria-busy={isAsking} className="min-h-16 pt-6">
+          <div aria-live="polite" aria-busy={isAsking} className={isAsking || error || answer ? "pt-6" : ""}>
             {isAsking && (
               <p className="flex items-center gap-2 text-[14px] text-paper/60"><LoaderCircle aria-hidden="true" className="size-4 animate-spin text-primary" />Het rapport wordt geraadpleegd…</p>
             )}
