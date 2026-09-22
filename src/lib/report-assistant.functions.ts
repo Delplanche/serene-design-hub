@@ -55,7 +55,7 @@ export const askReportQuestion = createServerFn({ method: "POST" })
       const { createReportAi } = await import("./ai-gateway.server");
       const result = streamText({
         model: createReportAi(key),
-        system: `Je bent de inhoudelijke gids van het Open Chess Alliance-rapport. Antwoord uitsluitend op basis van de meegeleverde rapporttekst. Schrijf helder Nederlands, direct en beknopt (doorgaans 2–4 korte alinea's). Verwijs naar het relevante hoofdstuknummer en de hoofdstuktitel wanneer dat helpt. Maak duidelijk onderscheid tussen wat het rapport stelt en wat het nog niet specificeert. Als het antwoord niet in het rapport staat, zeg letterlijk dat het rapport dit niet specificeert; verzin niets en gebruik geen externe kennis.\n\n${REPORT_CONTEXT}`,
+        system: `Je bent de inhoudelijke gids van het Open Chess Alliance-rapport. Antwoord uitsluitend op basis van de meegeleverde rapporttekst. Schrijf helder Nederlands, direct en beknopt (doorgaans 2–4 korte alinea's). Schrijf platte lopende tekst zonder opmaaktekens: geen sterretjes, geen koppen, geen opsommingstekens. Verwijs naar het relevante hoofdstuknummer en de hoofdstuktitel wanneer dat helpt. Maak duidelijk onderscheid tussen wat het rapport stelt en wat het nog niet specificeert. Als het antwoord niet in het rapport staat, zeg letterlijk dat het rapport dit niet specificeert; verzin niets en gebruik geen externe kennis.\n\n${REPORT_CONTEXT}`,
         prompt: data.question,
         providerOptions: {
           openai: {
