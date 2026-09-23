@@ -169,8 +169,9 @@ function ReportAssistant() {
   }
 
   return (
-    <section id="vraag" data-reveal className="relative -mx-5 scroll-mt-20 bg-ink px-5 py-16 text-paper sm:-mx-8 sm:px-8 sm:py-24">
-      <div className="grid gap-10 sm:grid-cols-12 sm:gap-8">
+    <section id="vraag" data-reveal className="report-bleed relative scroll-mt-20 bg-ink py-16 text-paper sm:py-24">
+      <div className="mx-auto grid max-w-6xl gap-10 px-5 sm:grid-cols-12 sm:gap-8 sm:px-8">
+
         <div className="sm:col-span-4">
           <p className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
             <span aria-hidden="true" className="inline-block size-1.5 bg-primary" />
