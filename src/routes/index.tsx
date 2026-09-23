@@ -183,12 +183,13 @@ function ReportAssistant() {
           </p>
         </div>
         <div className="sm:col-span-8">
-          <form onSubmit={handleSubmit} className="border-y border-paper/14 py-5 sm:py-7">
+          <form onSubmit={handleSubmit} className="border-t border-paper/14 pt-5 sm:pt-7">
             <label htmlFor="report-question" className="font-mono text-[10px] uppercase tracking-[0.16em] text-paper/50">
               Uw vraag
             </label>
             <Textarea
               id="report-question"
+              suppressHydrationWarning
               value={question}
               onChange={(event) => setQuestion(event.target.value)}
               placeholder="Bijvoorbeeld: hoe bewaart OCA het eigenaarschap van spelersdata?"
@@ -206,7 +207,7 @@ function ReportAssistant() {
             </div>
           </form>
 
-          <div aria-live="polite" aria-busy={isAsking} className={isAsking || error || answer ? "pt-6" : ""}>
+          <div aria-live="polite" aria-busy={isAsking} className={isAsking || error || answer ? "mt-6 border-t border-paper/14 pt-6" : ""}>
             {isAsking && (
               <p className="flex items-center gap-2 text-[14px] text-paper/60"><LoaderCircle aria-hidden="true" className="size-4 animate-spin text-primary" />Het rapport wordt geraadpleegd…</p>
             )}
@@ -237,7 +238,7 @@ function OpenChessReport() {
         <img
           src={marbleBoardUrl}
           alt="Marmeren schaakbord met klassieke schaakstukken"
-          className="report-cover-img absolute inset-0 size-full object-cover object-[58%_center] sm:object-center"
+          className="report-cover-img absolute inset-0 size-full object-cover object-[58%_72%] sm:object-[center_62%]"
           fetchPriority="high"
         />
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink via-ink/75 to-ink/35" />
@@ -344,8 +345,9 @@ function OpenChessReport() {
           </div>
         </section>
 
-        <aside data-reveal className="relative -mx-5 bg-ink px-5 py-14 text-paper sm:-mx-8 sm:px-8 sm:py-20">
-          <div className="grid gap-6 sm:grid-cols-12 sm:items-start">
+        <aside data-reveal className="report-bleed relative bg-ink py-14 text-paper sm:py-20">
+          <div className="mx-auto grid max-w-6xl gap-6 px-5 sm:grid-cols-12 sm:items-start sm:px-8">
+
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/45 sm:col-span-3 sm:pt-3">Uitgangspunt</p>
             <blockquote className="sm:col-span-9">
               <p className="max-w-[26ch] font-serif text-[clamp(1.6rem,3.6vw,2.6rem)] font-medium leading-[1.12]">
