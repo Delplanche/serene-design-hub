@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { LoaderCircle, MessageCircle, Send } from "lucide-react";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import marbleBoardUrl from "@/assets/marmeren-schaakbord.webp";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -94,13 +94,31 @@ function useScrollReveal() {
 
 function ReportHeader() {
   const { progress, active } = useReadingState();
+  const [open, setOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const activeChapter = chapters.find(([, , id]) => id === active);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const onClick = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("mousedown", onClick);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("mousedown", onClick);
+    };
+  }, [open]);
 
   return (
-    <header className="sticky top-0 z-40">
+    <header ref={headerRef} className="sticky top-0 z-40">
       <nav aria-label="Hoofdstukken" className="report-frost border-b border-border">
-        <div className="mx-auto flex h-[3.75rem] max-w-6xl items-center gap-4 px-5 sm:gap-7 sm:px-8">
+        <div className="mx-auto grid h-[3.75rem] max-w-6xl grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 px-5 sm:flex sm:gap-7 sm:px-8">
           <a
             href="#top"
+            onClick={() => setOpen(false)}
             className="flex shrink-0 items-center gap-2.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
           >
             <span aria-hidden="true" className="grid size-6 grid-cols-2 grid-rows-2 overflow-hidden rounded-[2px] ring-1 ring-inset ring-ink/20">
@@ -114,7 +132,34 @@ function ReportHeader() {
               <span className="mt-1 hidden font-mono text-[9px] uppercase tracking-[0.16em] text-mist sm:inline">Strategisch rapport</span>
             </span>
           </a>
-          <div className="no-scrollbar ml-auto flex items-center gap-4 overflow-x-auto sm:gap-5">
+
+          {/* Mobiel: actueel hoofdstuk */}
+          <p className="min-w-0 truncate text-center font-mono text-[10px] uppercase tracking-[0.16em] text-soft sm:hidden" aria-live="polite">
+            {activeChapter ? (
+              <>
+                <span className="text-primary">{activeChapter[0]}</span>
+                <span className="text-mist"> / 08 — </span>
+                <span className="text-ink">{activeChapter[1]}</span>
+              </>
+            ) : (
+              <span className="text-mist">Strategisch rapport</span>
+            )}
+          </p>
+
+          <button
+            type="button"
+            aria-expanded={open}
+            aria-controls="mobiele-inhoud"
+            aria-label={open ? "Inhoudsopgave sluiten" : "Inhoudsopgave openen"}
+            onClick={() => setOpen((v) => !v)}
+            className="relative grid size-11 place-items-center rounded-[2px] border border-ink/15 transition-colors hover:border-ink/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:hidden"
+          >
+            <span aria-hidden="true" className={`absolute h-px w-5 bg-ink transition-transform duration-300 motion-reduce:transition-none ${open ? "rotate-45" : "-translate-y-[3.5px]"}`} />
+            <span aria-hidden="true" className={`absolute h-px w-5 bg-ink transition-transform duration-300 motion-reduce:transition-none ${open ? "-rotate-45" : "translate-y-[3.5px]"}`} />
+          </button>
+
+          {/* Desktop: volledige rij */}
+          <div className="ml-auto hidden items-center gap-5 sm:flex">
             {chapters.map(([number, label, id]) => {
               const isActive = active === id;
               return (
@@ -134,6 +179,32 @@ function ReportHeader() {
               );
             })}
           </div>
+        </div>
+
+        <div
+          id="mobiele-inhoud"
+          hidden={!open}
+          className="border-t border-border bg-paper sm:hidden"
+        >
+          <p className="px-5 pt-4 font-mono text-[9px] uppercase tracking-[0.2em] text-mist">Inhoud</p>
+          <ul className="grid grid-cols-2 gap-px px-5 pb-5 pt-3">
+            {chapters.map(([number, label, id]) => {
+              const isActive = active === id;
+              return (
+                <li key={id} className="border-b border-border">
+                  <a
+                    href={`#${id}`}
+                    onClick={() => setOpen(false)}
+                    aria-current={isActive ? "true" : undefined}
+                    className={`flex min-h-12 items-center gap-2.5 border-l-2 pl-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isActive ? "border-primary" : "border-transparent"}`}
+                  >
+                    <span className={`font-mono text-[10px] ${isActive ? "text-primary" : "text-mist"}`}>{number}</span>
+                    <span className={`text-[14px] font-medium ${isActive ? "text-ink" : "text-soft"}`}>{label}</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </nav>
       <div aria-hidden="true" className="h-px w-full bg-border">

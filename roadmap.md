@@ -7,3 +7,4 @@
 - [x] Voeg een inhoudelijk begrensde AI-vraagfunctie voor het rapport toe
 - [x] Vereenvoudig de footer en voeg de Delplanche-vermelding toe
 - [x] Versterk de donkere typografie en controleer mobiel en desktop
+- [x] Nieuwe mobiele menubalk met uitklapbare inhoudsopgave
