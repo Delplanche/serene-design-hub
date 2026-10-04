@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Structure the public report as an editorial longform document with hierarchical chapters, not as a dashboard or a repeated card grid, because the content must read as an authoritative policy publication.

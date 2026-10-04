@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { LoaderCircle, MessageCircle, Send } from "lucide-react";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { ArrowDown, ArrowUpRight, LoaderCircle, MessageCircle, Send } from "lucide-react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import marbleBoardUrl from "@/assets/marmeren-schaakbord.webp";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,10 +11,10 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Strategisch Rapport — Open Chess Alliance" },
-      { name: "description", content: "Een blauwdruk voor digitale soevereiniteit en marktcorrectie via federatieve schaakstandaarden." },
+      { name: "description", content: "Een blauwdruk voor digitale soevereiniteit via open standaarden voor identiteit, rating en integriteit in digitaal schaken." },
       { property: "og:title", content: "Strategisch Rapport — Open Chess Alliance" },
       { property: "og:description", content: "De open standaard voor identiteit, ratings en integriteit in digitaal schaken." },
-      { property: "og:type", content: "website" },
+      { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
@@ -22,38 +22,40 @@ export const Route = createFileRoute("/")({
 });
 
 const chapters = [
-  ["01", "Diagnose", "diagnose"],
-  ["02", "Protocol", "protocol"],
-  ["03", "Identiteit", "identiteit"],
-  ["04", "Rating", "rating"],
-  ["05", "Integriteit", "integriteit"],
-  ["06", "Uitrol", "uitrol"],
-  ["07", "Roadmap", "roadmap"],
-  ["08", "Vraag AI", "vraag"],
+  ["01", "Waarom ingrijpen", "context"],
+  ["02", "De open standaard", "standaard"],
+  ["03", "Publieke toepassing", "toepassing"],
+  ["04", "Uitvoering", "uitvoering"],
+  ["AI", "Vraag het rapport", "vraag"],
 ] as const;
 
-function SectionLabel({ number, children }: { number: string; children: React.ReactNode }) {
-  return (
-    <p className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
-      <span aria-hidden="true" className="inline-block size-1.5 bg-primary" />
-      {number} — {children}
-    </p>
-  );
-}
+const roles = [
+  ["OCA", "Neutrale regie", "Beheert de standaard, toetst conformiteit en bewaakt het gemeenschappelijk belang."],
+  ["Lichess", "Technische ruggengraat", "Brengt open-source infrastructuur en ervaring met publieke API’s in."],
+  ["ChessBase", "Professioneel bereik", "Verbindt professionele gebruikers, partijenarchieven en commerciële toepassingen."],
+  ["FIDE", "Institutionele legitimiteit", "Verbindt de standaard met georganiseerde sport en officiële erkenning."],
+] as const;
+
+const phases = [
+  ["01", "Maanden 1–3", "Oprichting", "Belgische VZW registreren en het Founding Charter met kernpartners tekenen."],
+  ["02", "Maanden 4–9", "Protocolontwikkeling", "API-standaarden en de open referentie-implementatie definiëren."],
+  ["03", "Maanden 10–15", "Institutionele pilots", "Pilots starten in bibliotheken en woonzorgcentra in Vlaanderen en Nederland."],
+  ["04", "Maand 16+", "Publieke lancering", "De OCA Rating wereldwijd lanceren en de markt uitnodigen tot conformiteit."],
+] as const;
 
 function useReadingState() {
   const [progress, setProgress] = useState(0);
-  const [active, setActive] = useState<string>("");
+  const [active, setActive] = useState("");
 
   useEffect(() => {
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0);
-      const mid = window.innerHeight * 0.35;
+      const threshold = window.innerHeight * 0.34;
       let current = "";
       for (const [, , id] of chapters) {
-        const el = document.getElementById(id);
-        if (el && el.getBoundingClientRect().top <= mid) current = id;
+        const element = document.getElementById(id);
+        if (element && element.getBoundingClientRect().top <= threshold) current = id;
       }
       setActive(current);
     };
@@ -71,25 +73,34 @@ function useReadingState() {
 
 function useScrollReveal() {
   useEffect(() => {
-    const els = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
-    if (!("IntersectionObserver" in window) || els.length === 0) {
-      els.forEach((el) => el.classList.add("is-inview"));
+    const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach((element) => element.classList.add("is-inview"));
       return;
     }
     const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-inview");
-            observer.unobserve(entry.target);
-          }
+      (entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-inview");
+          observer.unobserve(entry.target);
         }
-      },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.08 },
+      }),
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.06 },
     );
-    els.forEach((el) => observer.observe(el));
+    elements.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
   }, []);
+}
+
+function OcaMark({ inverse = false }: { inverse?: boolean }) {
+  return (
+    <span aria-hidden="true" className={`grid size-7 shrink-0 grid-cols-2 grid-rows-2 overflow-hidden border ${inverse ? "border-paper/35" : "border-ink/30"}`}>
+      <span className={inverse ? "bg-paper" : "bg-ink"} />
+      <span />
+      <span />
+      <span className={inverse ? "bg-paper" : "bg-ink"} />
+    </span>
+  );
 }
 
 function ReportHeader() {
@@ -100,115 +111,83 @@ function ReportHeader() {
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    const onClick = (e: MouseEvent) => {
-      if (headerRef.current && !headerRef.current.contains(e.target as Node)) setOpen(false);
+    const onKey = (event: KeyboardEvent) => event.key === "Escape" && setOpen(false);
+    const onPointer = (event: PointerEvent) => {
+      if (headerRef.current && !headerRef.current.contains(event.target as Node)) setOpen(false);
     };
     document.addEventListener("keydown", onKey);
-    document.addEventListener("mousedown", onClick);
+    document.addEventListener("pointerdown", onPointer);
     return () => {
       document.removeEventListener("keydown", onKey);
-      document.removeEventListener("mousedown", onClick);
+      document.removeEventListener("pointerdown", onPointer);
     };
   }, [open]);
 
   return (
-    <header ref={headerRef} className="sticky top-0 z-40">
-      <nav aria-label="Hoofdstukken" className="report-frost border-b border-border">
-        <div className="mx-auto grid h-[3.75rem] max-w-6xl grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 px-5 sm:flex sm:gap-7 sm:px-8">
-          <a
-            href="#top"
-            onClick={() => setOpen(false)}
-            className="flex shrink-0 items-center gap-2.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-          >
-            <span aria-hidden="true" className="grid size-6 grid-cols-2 grid-rows-2 overflow-hidden rounded-[2px] ring-1 ring-inset ring-ink/20">
-              <span className="bg-ink" />
-              <span className="bg-transparent" />
-              <span className="bg-transparent" />
-              <span className="bg-ink" />
-            </span>
-            <span className="flex flex-col leading-none">
-              <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink">OCA</span>
-              <span className="mt-1 hidden font-mono text-[9px] uppercase tracking-[0.16em] text-mist sm:inline">Strategisch rapport</span>
-            </span>
-          </a>
+    <header ref={headerRef} className="sticky top-0 z-50 border-b border-border bg-paper/95 backdrop-blur-md">
+      <nav aria-label="Rapportnavigatie" className="mx-auto grid h-16 max-w-[88rem] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-5 lg:px-10">
+        <a href="#top" onClick={() => setOpen(false)} className="flex shrink-0 items-center gap-3 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
+          <OcaMark />
+          <span className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-ink">OCA</span>
+        </a>
 
-          {/* Mobiel: actueel hoofdstuk */}
-          <p className="min-w-0 truncate text-center font-mono text-[10px] uppercase tracking-[0.16em] text-soft sm:hidden" aria-live="polite">
-            {activeChapter ? (
-              <>
-                <span className="text-primary">{activeChapter[0]}</span>
-                <span className="text-mist"> / 08 — </span>
-                <span className="text-ink">{activeChapter[1]}</span>
-              </>
-            ) : (
-              <span className="text-mist">Strategisch rapport</span>
-            )}
-          </p>
+        <p className="min-w-0 truncate text-center font-mono text-[10px] uppercase tracking-[0.1em] text-soft lg:hidden" aria-live="polite">
+          {activeChapter ? <><span className="text-primary">{activeChapter[0]}</span><span> / {activeChapter[1]}</span></> : "Strategisch rapport"}
+        </p>
 
-          <button
-            type="button"
-            aria-expanded={open}
-            aria-controls="mobiele-inhoud"
-            aria-label={open ? "Inhoudsopgave sluiten" : "Inhoudsopgave openen"}
-            onClick={() => setOpen((v) => !v)}
-            className="relative grid size-11 place-items-center rounded-[2px] border border-ink/15 transition-colors hover:border-ink/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:hidden"
-          >
-            <span aria-hidden="true" className={`absolute h-px w-5 bg-ink transition-transform duration-300 motion-reduce:transition-none ${open ? "rotate-45" : "-translate-y-[3.5px]"}`} />
-            <span aria-hidden="true" className={`absolute h-px w-5 bg-ink transition-transform duration-300 motion-reduce:transition-none ${open ? "-rotate-45" : "translate-y-[3.5px]"}`} />
-          </button>
-
-          {/* Desktop: volledige rij */}
-          <div className="ml-auto hidden items-center gap-5 sm:flex">
-            {chapters.map(([number, label, id]) => {
-              const isActive = active === id;
-              return (
-                <a
-                  key={id}
-                  href={`#${id}`}
-                  aria-current={isActive ? "true" : undefined}
-                  className="group relative flex shrink-0 items-baseline gap-1.5 py-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-                >
-                  <span className={`font-mono text-[10px] transition-colors ${isActive ? "text-primary" : "text-mist"}`}>{number}</span>
-                  <span className={`text-[12px] font-medium transition-colors ${isActive ? "text-ink" : "text-soft group-hover:text-ink"}`}>{label}</span>
-                  <span
-                    aria-hidden="true"
-                    className={`absolute -bottom-0.5 left-0 h-px w-full origin-left bg-primary transition-transform duration-300 ${isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
-                  />
-                </a>
-              );
-            })}
-          </div>
+        <div className="ml-auto hidden items-stretch lg:flex">
+          {chapters.map(([number, label, id]) => {
+            const selected = active === id;
+            return (
+              <a key={id} href={`#${id}`} aria-current={selected ? "location" : undefined} className={`flex min-h-16 items-center gap-2 border-l border-border px-4 text-[13px] transition-colors last:border-r ${selected ? "bg-linen text-ink" : "text-soft hover:bg-linen/60 hover:text-ink"}`}>
+                <span className={`font-mono text-[10px] ${selected ? "text-primary" : "text-mist"}`}>{number}</span>
+                <span className="font-medium">{label}</span>
+              </a>
+            );
+          })}
         </div>
 
-        <div
-          id="mobiele-inhoud"
-          hidden={!open}
-          className="border-t border-border bg-paper sm:hidden"
-        >
-          <p className="px-5 pt-4 font-mono text-[9px] uppercase tracking-[0.2em] text-mist">Inhoud</p>
-          <ul className="grid grid-cols-2 gap-px px-5 pb-5 pt-3">
+        <Button type="button" variant="outline" size="icon" aria-expanded={open} aria-controls="mobile-contents" aria-label={open ? "Inhoudsopgave sluiten" : "Inhoudsopgave openen"} onClick={() => setOpen((value) => !value)} className="relative size-11 rounded-none border-ink/20 bg-transparent shadow-none lg:hidden">
+          <span aria-hidden="true" className={`absolute h-px w-5 bg-ink transition-transform ${open ? "rotate-45" : "-translate-y-1"}`} />
+          <span aria-hidden="true" className={`absolute h-px w-5 bg-ink transition-transform ${open ? "-rotate-45" : "translate-y-1"}`} />
+        </Button>
+      </nav>
+
+      <div id="mobile-contents" hidden={!open} className="border-t border-border bg-paper lg:hidden">
+        <div className="mx-auto max-w-xl px-5 py-5">
+          <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-mist">Inhoud van het rapport</p>
+          <ol className="mt-4 border-t border-border">
             {chapters.map(([number, label, id]) => {
-              const isActive = active === id;
+              const selected = active === id;
               return (
                 <li key={id} className="border-b border-border">
-                  <a
-                    href={`#${id}`}
-                    onClick={() => setOpen(false)}
-                    aria-current={isActive ? "true" : undefined}
-                    className={`flex min-h-12 items-center gap-2.5 border-l-2 pl-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isActive ? "border-primary" : "border-transparent"}`}
-                  >
-                    <span className={`font-mono text-[10px] ${isActive ? "text-primary" : "text-mist"}`}>{number}</span>
-                    <span className={`text-[14px] font-medium ${isActive ? "text-ink" : "text-soft"}`}>{label}</span>
+                  <a href={`#${id}`} onClick={() => setOpen(false)} aria-current={selected ? "location" : undefined} className="grid min-h-14 grid-cols-[2rem_1fr_auto] items-center gap-3 py-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                    <span className={`font-mono text-[11px] ${selected ? "text-primary" : "text-mist"}`}>{number}</span>
+                    <span className={`text-[16px] font-medium ${selected ? "text-ink" : "text-soft"}`}>{label}</span>
+                    <ArrowDown aria-hidden="true" className="size-4 text-mist" />
                   </a>
                 </li>
               );
             })}
-          </ul>
+          </ol>
         </div>
-      </nav>
-      <div aria-hidden="true" className="h-px w-full bg-border">
-        <div className="h-px origin-left bg-primary transition-transform duration-150" style={{ transform: `scaleX(${progress})` }} />
+      </div>
+
+      <div aria-hidden="true" className="h-0.5 bg-border"><div className="h-full origin-left bg-primary" style={{ transform: `scaleX(${progress})` }} /></div>
+    </header>
+  );
+}
+
+function ChapterIntro({ number, kicker, title, children }: { number: string; kicker: string; title: string; children?: ReactNode }) {
+  return (
+    <header className="grid gap-6 lg:grid-cols-12 lg:gap-10">
+      <div className="lg:col-span-4">
+        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-primary">{number} / {kicker}</p>
+        <p aria-hidden="true" className="mt-5 font-serif text-7xl leading-none text-stone lg:text-8xl">{number}</p>
+      </div>
+      <div className="lg:col-span-8">
+        <h2 className="max-w-[21ch] font-serif text-[2.5rem] font-semibold leading-[1.02] text-ink sm:text-5xl lg:text-6xl">{title}</h2>
+        {children}
       </div>
     </header>
   );
@@ -240,55 +219,29 @@ function ReportAssistant() {
   }
 
   return (
-    <section id="vraag" data-reveal className="report-bleed relative scroll-mt-20 bg-ink py-16 text-paper sm:py-24">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 sm:grid-cols-12 sm:gap-8 sm:px-8">
-
-        <div className="sm:col-span-4">
-          <p className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
-            <span aria-hidden="true" className="inline-block size-1.5 bg-primary" />
-            08 — Rapportassistent
-          </p>
-          <h2 className="mt-4 max-w-[18ch] font-serif text-3xl font-medium leading-tight sm:text-4xl">Vraag door op het rapport</h2>
-          <p className="mt-4 max-w-[40ch] text-[14px] leading-relaxed text-paper/65">
-            Stel een vrije vraag. Het antwoord blijft binnen de inhoud en benoemt wat het rapport niet specificeert.
-          </p>
+    <section id="vraag" data-reveal className="scroll-mt-20 bg-ink text-paper">
+      <div className="mx-auto grid max-w-[88rem] gap-10 px-5 py-20 md:px-8 lg:grid-cols-12 lg:gap-10 lg:px-10 lg:py-28">
+        <div className="lg:col-span-4">
+          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-signal">Interactieve leeshulp</p>
+          <h2 className="mt-5 max-w-[11ch] font-serif text-4xl font-semibold leading-[1.03] lg:text-6xl">Vraag het rapport</h2>
+          <p className="mt-6 max-w-[35ch] text-[16px] leading-7 text-paper/72">Stel een vrije vraag. Het antwoord gebruikt uitsluitend de inhoud van deze publicatie en benoemt wat niet wordt gespecificeerd.</p>
         </div>
-        <div className="sm:col-span-8">
-          <form onSubmit={handleSubmit} className="border-t border-paper/14 pt-5 sm:pt-7">
-            <label htmlFor="report-question" className="font-mono text-[10px] uppercase tracking-[0.16em] text-paper/50">
-              Uw vraag
-            </label>
-            <Textarea
-              id="report-question"
-              suppressHydrationWarning
-              value={question}
-              onChange={(event) => setQuestion(event.target.value)}
-              placeholder="Bijvoorbeeld: hoe bewaart OCA het eigenaarschap van spelersdata?"
-              maxLength={500}
-              rows={3}
-              disabled={isAsking}
-              className="mt-3 min-h-28 resize-y rounded-[3px] border-paper/18 bg-paper/[0.035] px-4 py-3 text-[15px] leading-relaxed text-paper shadow-none placeholder:text-paper/35 focus-visible:ring-primary"
-            />
-            <div className="mt-3 flex items-center justify-between gap-4">
-              <span className="font-mono text-[9px] text-paper/35">{question.length}/500</span>
-              <Button type="submit" disabled={question.trim().length < 3 || isAsking} className="rounded-[3px] bg-paper px-4 text-ink shadow-none hover:bg-paper/90">
+        <div className="lg:col-span-7 lg:col-start-6">
+          <form onSubmit={handleSubmit} className="border-t border-paper/25 pt-6">
+            <label htmlFor="report-question" className="font-mono text-[11px] uppercase tracking-[0.14em] text-paper/72">Uw vraag aan het rapport</label>
+            <Textarea id="report-question" suppressHydrationWarning value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Hoe bewaart OCA het eigenaarschap van spelersdata?" maxLength={500} rows={4} disabled={isAsking} className="mt-4 min-h-36 resize-y rounded-none border-paper/25 bg-paper/[0.04] px-4 py-4 text-[17px] leading-7 text-paper shadow-none placeholder:text-paper/42 focus-visible:ring-signal" />
+            <div className="mt-4 grid grid-cols-[1fr_auto] items-center gap-4">
+              <span className="font-mono text-[10px] text-paper/55">{question.length} / 500</span>
+              <Button type="submit" disabled={question.trim().length < 3 || isAsking} className="h-11 rounded-none bg-signal px-5 text-paper shadow-none hover:bg-signal/90">
                 {isAsking ? <LoaderCircle aria-hidden="true" className="animate-spin" /> : <Send aria-hidden="true" />}
-                {isAsking ? "Antwoord formuleren" : "Vraag stellen"}
+                {isAsking ? "Rapport raadplegen" : "Vraag stellen"}
               </Button>
             </div>
           </form>
-
-          <div aria-live="polite" aria-busy={isAsking} className={isAsking || error || answer ? "mt-6 border-t border-paper/14 pt-6" : ""}>
-            {isAsking && (
-              <p className="flex items-center gap-2 text-[14px] text-paper/60"><LoaderCircle aria-hidden="true" className="size-4 animate-spin text-primary" />Het rapport wordt geraadpleegd…</p>
-            )}
-            {error && <p role="alert" className="border-l-2 border-destructive pl-4 text-[14px] leading-relaxed text-paper/80">{error}</p>}
-            {answer && (
-              <div className="grid gap-4 sm:grid-cols-[auto_1fr]">
-                <MessageCircle aria-hidden="true" className="mt-1 size-5 text-primary" />
-                <p className="max-w-[62ch] whitespace-pre-wrap font-serif text-lg leading-relaxed text-paper/90 sm:text-xl">{answer}</p>
-              </div>
-            )}
+          <div aria-live="polite" aria-busy={isAsking} className={isAsking || error || answer ? "mt-8 border-t border-paper/20 pt-8" : ""}>
+            {isAsking && <p className="flex items-center gap-3 text-[15px] text-paper/72"><LoaderCircle aria-hidden="true" className="size-4 animate-spin text-signal" />Het rapport wordt geraadpleegd…</p>}
+            {error && <p role="alert" className="border-l-2 border-destructive pl-4 text-[15px] leading-7 text-paper/85">{error}</p>}
+            {answer && <div className="grid gap-4 sm:grid-cols-[auto_1fr]"><MessageCircle aria-hidden="true" className="mt-1 size-5 text-signal" /><p className="max-w-[58ch] whitespace-pre-wrap font-serif text-xl leading-relaxed text-paper sm:text-2xl">{answer}</p></div>}
           </div>
         </div>
       </div>
@@ -300,204 +253,149 @@ function OpenChessReport() {
   useScrollReveal();
 
   return (
-    <div id="top" className="relative min-h-screen overflow-hidden bg-paper font-sans text-ink antialiased">
-      <div aria-hidden="true" className="report-grid pointer-events-none fixed inset-0 opacity-60" />
+    <div id="top" className="min-h-screen overflow-x-hidden bg-paper font-sans text-ink antialiased">
       <ReportHeader />
 
-
-      <section className="relative h-[calc(100svh-5.5rem)] min-h-[500px] max-h-[720px] overflow-hidden bg-ink">
-        <img
-          src={marbleBoardUrl}
-          alt="Marmeren schaakbord met klassieke schaakstukken"
-          className="report-cover-img absolute inset-0 size-full object-cover object-[58%_72%] sm:object-[center_62%]"
-          fetchPriority="high"
-        />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink via-ink/75 to-ink/35" />
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(120%_85%_at_50%_15%,transparent_35%,color-mix(in_oklab,var(--ink)_78%,transparent)_100%)]" />
-        <div className="relative mx-auto flex h-full max-w-6xl items-end px-5 pb-8 sm:px-8 sm:pb-14">
-          <div className="w-full max-w-4xl text-paper">
-            <div className="report-reveal flex items-center gap-3">
-              <span className="size-1.5 bg-primary" />
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/70 sm:text-[11px]">00 — Open Chess Alliance</span>
-              <span className="h-px flex-1 bg-paper/20" />
-              <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-paper/60 sm:inline sm:text-[11px]">Brussel · 2025</span>
-            </div>
-            <h1 className="report-reveal mt-6 max-w-[17ch] font-serif text-[clamp(2.4rem,7vw,4.8rem)] font-medium leading-[0.98] tracking-[-0.01em]" style={{ animationDelay: "60ms" }}>
-              Strategisch rapport: <em className="font-light italic">de Open Chess Alliance</em>
-            </h1>
-            <p className="report-reveal mt-6 max-w-[48ch] text-[14px] leading-relaxed text-paper/70 sm:text-[16px]" style={{ animationDelay: "120ms" }}>
-              Een blauwdruk voor digitale soevereiniteit en marktcorrectie via federatieve schaakstandaarden.
-            </p>
-            <div className="report-reveal mt-7 border-t border-paper/20 pt-5" style={{ animationDelay: "180ms" }}>
-              <div className="flex flex-wrap items-end gap-y-4">
-                <dl className="grid flex-1 grid-cols-3 gap-x-4">
-                  {[["Markt 2025", "$3,70 mld"], ["Prognose 2032", "$7,64 mld"], ["Groei CAGR", "10,91%"]].map(([label, value]) => (
-                    <div key={label} className="border-l border-paper/15 pl-3 first:border-l-0 first:pl-0">
-                      <dt className="font-mono text-[9px] uppercase tracking-[0.14em] text-paper/45">{label}</dt>
-                      <dd className="mt-1.5 font-serif text-lg font-medium leading-none sm:text-2xl">{value}</dd>
-                    </div>
-                  ))}
-                </dl>
-                <a href="#diagnose" className="group ml-auto hidden items-center gap-2 border border-paper/25 px-4 py-2.5 text-[12px] font-medium text-paper transition-colors hover:border-paper/70 hover:bg-paper/5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary sm:inline-flex">
-                  Start lezen <span aria-hidden="true" className="font-mono transition-transform group-hover:translate-y-0.5">↓</span>
-                </a>
-              </div>
+      <section className="relative min-h-[650px] overflow-hidden bg-ink text-paper sm:min-h-[680px]">
+        <img src={marbleBoardUrl} alt="Marmeren schaakbord met klassieke schaakstukken" className="report-cover-img absolute inset-0 size-full object-cover object-[58%_60%] sm:object-[center_58%]" fetchPriority="high" />
+        <div aria-hidden="true" className="absolute inset-0 bg-cover-shade" />
+        <div className="relative mx-auto grid min-h-[650px] max-w-[88rem] grid-rows-[auto_1fr_auto] px-5 py-7 sm:min-h-[680px] md:px-8 lg:px-10 lg:py-10">
+          <div className="grid grid-cols-[1fr_auto] gap-6 border-b border-paper/25 pb-5 font-mono text-[10px] uppercase tracking-[0.14em] text-paper/68">
+            <span>Strategisch rapport / OCA–01</span><span>Brussel · 2025</span>
+          </div>
+          <div className="flex items-end py-10 lg:py-14">
+            <div className="max-w-5xl">
+              <p className="report-reveal font-mono text-[11px] uppercase tracking-[0.18em] text-signal">Open Chess Alliance</p>
+              <h1 className="report-reveal mt-5 max-w-[15ch] font-serif text-[3.25rem] font-semibold leading-[0.96] sm:text-7xl lg:text-[6.6rem]">Een open standaard voor het digitale schaakspel</h1>
+              <p className="report-reveal mt-7 max-w-[55ch] text-[17px] leading-7 text-paper/78 sm:text-xl sm:leading-8">Een strategische blauwdruk voor draagbare identiteit, vergelijkbare ratings en gedeelde integriteit — zonder een nieuw platform op te leggen.</p>
             </div>
           </div>
+          <a href="#samenvatting" className="group flex min-h-12 items-center justify-between border-t border-paper/25 pt-5 text-[13px] font-medium text-paper focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal">
+            <span>Lees de managementsamenvatting</span><ArrowDown aria-hidden="true" className="size-4 transition-transform group-hover:translate-y-1" />
+          </a>
         </div>
       </section>
 
-      <main className="relative mx-auto max-w-6xl px-5 sm:px-8">
-
-        <section id="diagnose" data-reveal className="scroll-mt-20 border-t border-border py-16 sm:py-24">
-          <div className="grid gap-8 sm:grid-cols-12">
-            <div className="sm:col-span-4">
-              <SectionLabel number="01">Diagnose</SectionLabel>
-              <h2 className="mt-4 max-w-[20ch] font-serif text-3xl font-medium leading-tight sm:text-4xl">De markt groeit. Het vertrouwen niet.</h2>
+      <main>
+        <section id="samenvatting" data-reveal className="scroll-mt-20 border-b border-border bg-linen">
+          <div className="mx-auto grid max-w-[88rem] gap-10 px-5 py-16 md:px-8 lg:grid-cols-12 lg:px-10 lg:py-24">
+            <div className="lg:col-span-4">
+              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-primary">Managementsamenvatting</p>
+              <h2 className="mt-5 max-w-[13ch] font-serif text-4xl font-semibold leading-[1.06] lg:text-5xl">Niet nóg een platform. Wel één gedeelde onderlaag.</h2>
             </div>
-            <div className="report-frost rounded-[3px] p-5 sm:col-span-8 sm:p-8">
-              <div className="grid gap-6 sm:grid-cols-3">
+            <div className="lg:col-span-7 lg:col-start-6">
+              <p className="max-w-[52ch] font-serif text-2xl leading-snug text-ink lg:text-3xl">De digitale schaakwereld groeit, maar identiteit, reputatie en speldata blijven opgesloten in afzonderlijke systemen.</p>
+              <div className="mt-10 grid border-t border-ink/25 sm:grid-cols-3">
                 {[
-                  ["Fragmentatie", "Drie silo’s", "Lichess, ChessBase en FIDE beheren gescheiden identiteiten, ratings en infrastructuur."],
-                  ["Walled garden", "Platformbezit", "Spelgeschiedenis, connecties en reputatie bewegen niet mee met de speler."],
-                  ["Marktmacht", "Eén poortwachter", "Netwerkeffecten beperken keuze, innovatie en een gezonde digitale schaakcultuur."],
-                ].map(([label, title, text]) => (
-                  <div key={label}>
-                    <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-mist">{label}</p>
-                    <h3 className="mt-2 font-serif text-xl font-medium">{title}</h3>
-                    <p className="mt-2 text-[13px] leading-relaxed text-soft">{text}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-8 border-t border-border pt-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-soft">Strategisch inzicht</p>
-                <p className="mt-3 max-w-[42ch] font-serif text-lg leading-snug sm:text-xl">OCA wordt geen vierde platform. Het wordt de neutrale laag die bestaande sterktes verbindt.</p>
+                  ["Probleem", "Gescheiden identiteiten, ratings en integriteitsbesluiten beperken vertrouwen en keuze."],
+                  ["Voorstel", "Een neutrale standaard verbindt bestaande platforms zonder hun eigenheid te vervangen."],
+                  ["Uitkomst", "De speler houdt controle; marktpartijen concurreren op kwaliteit bovenop gedeelde rails."],
+                ].map(([title, text]) => <div key={title} className="border-b border-ink/15 py-5 sm:border-b-0 sm:border-r sm:px-5 sm:first:pl-0 sm:last:border-r-0"><h3 className="font-mono text-[10px] uppercase tracking-[0.14em] text-primary">{title}</h3><p className="mt-3 text-[15px] leading-6 text-soft">{text}</p></div>)}
               </div>
             </div>
           </div>
         </section>
 
-        <section id="protocol" data-reveal className="scroll-mt-20 border-t border-border py-16 sm:py-24">
-          <SectionLabel number="02">Alliantieprotocol</SectionLabel>
-          <h2 className="mt-4 max-w-[24ch] font-serif text-3xl font-medium leading-tight sm:text-4xl">Een gemeenschappelijke standaard tussen bestaande spelers</h2>
-          <div className="mt-10 grid gap-3 sm:grid-cols-3">
-            {[
-              ["Technische ruggengraat", "Lichess", "Open-source infrastructuur en API-expertise."],
-              ["Neutrale kern", "OCA-standaard", "Identiteit, rating en integriteit zonder lock-in."],
-              ["Commercie & legitimiteit", "ChessBase + FIDE", "Professionele gebruikers, historische data en officiële erkenning."],
-            ].map(([label, title, text], index) => (
-              <article key={title} className={`report-frost report-lift rounded-[3px] p-5 ${index === 1 ? "ring-1 ring-inset ring-primary/25" : ""}`}>
-                <p className={`font-mono text-[10px] uppercase tracking-[0.14em] ${index === 1 ? "text-primary" : "text-mist"}`}>{label}</p>
-                <h3 className="mt-2 font-serif text-xl font-medium">{title}</h3>
-                <p className="mt-2 text-[13px] leading-relaxed text-soft">{text}</p>
-              </article>
-            ))}
-          </div>
-          <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 rounded-[3px] border border-border px-4 py-3 font-mono text-[11px] text-soft">
-            <span className="uppercase text-primary">Schema</span><span>global_id → portable_identity</span><span className="text-mist">|</span><span>result → oca_rating</span><span className="text-mist">|</span><span>signal → fair_play</span>
-          </div>
-        </section>
+        <section id="context" data-reveal className="scroll-mt-20 border-b border-border">
+          <div className="mx-auto max-w-[88rem] px-5 py-20 md:px-8 lg:px-10 lg:py-28">
+            <ChapterIntro number="01" kicker="Waarom ingrijpen" title="De markt groeit. Het vertrouwen groeit niet mee.">
+              <p className="mt-7 max-w-[58ch] text-[17px] leading-7 text-soft">De schaakeconomie beweegt richting een verdubbeling, terwijl spelersprofielen, ratings en reputatie verdeeld blijven over gesloten ecosystemen. Groei zonder interoperabiliteit versterkt bestaande poortwachters.</p>
+            </ChapterIntro>
 
-        <section id="identiteit" data-reveal className="scroll-mt-20 border-t border-border py-16 sm:py-24">
-          <div className="grid items-start gap-8 sm:grid-cols-2">
-            <div>
-              <SectionLabel number="03">Digitale soevereiniteit</SectionLabel>
-              <h2 className="mt-4 max-w-[22ch] font-serif text-3xl font-medium leading-tight sm:text-4xl">Identiteit en data blijven bij de speler</h2>
-              <p className="mt-5 max-w-[44ch] text-[15px] leading-relaxed text-soft">Spelers gebruiken hun vertrouwde account. Een universele Global_ID verbindt dat profiel veilig met elk deelnemend platform, terwijl persoonlijke datakluizen geschiedenis en toestemming onder eigen controle houden.</p>
+            <div className="mt-14 grid border-y border-ink/25 lg:ml-[calc(33.333%+1.7rem)] lg:grid-cols-3">
+              {[["Markt 2025", "$3,70 mld"], ["Prognose 2032", "$7,64 mld"], ["Jaarlijkse groei", "10,91% CAGR"]].map(([label, value]) => <dl key={label} className="border-b border-ink/15 py-6 lg:border-b-0 lg:border-r lg:px-7 lg:first:pl-0 lg:last:border-r-0"><dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-mist">{label}</dt><dd className="mt-3 font-serif text-3xl font-semibold lg:text-4xl">{value}</dd></dl>)}
             </div>
-            <div className="grid grid-cols-2 gap-3">
-              {[["Identiteit", "Federatief en verifieerbaar."], ["Historie", "Vrij exporteerbaar en synchroniseerbaar."], ["Toestemming", "Specifiek, inzichtelijk en intrekbaar."], ["Eigenaarschap", "De speler is de bron van vertrouwen."]].map(([title, text], index) => (
-                <div key={title} className={`report-frost report-lift rounded-[3px] p-4 sm:p-5 ${index === 3 ? "ring-1 ring-inset ring-primary/25" : ""}`}>
-                  <p className={`font-mono text-[9px] uppercase tracking-[0.14em] ${index === 3 ? "text-primary" : "text-mist"}`}>{title}</p>
-                  <p className="mt-2 text-[13px] leading-relaxed text-soft">{text}</p>
-                </div>
-              ))}
+
+            <div className="mt-14 grid gap-px border border-border bg-border lg:grid-cols-3">
+              {[
+                ["01", "Fragmentatie", "Lichess, ChessBase en FIDE beheren gescheiden identiteiten, ratings en infrastructuur."],
+                ["02", "Platformbezit", "Spelgeschiedenis, connecties en reputatie bewegen vandaag niet vanzelf met de speler mee."],
+                ["03", "Marktmacht", "Netwerkeffecten beperken keuze, innovatie en een gezonde digitale schaakcultuur."],
+              ].map(([number, title, text]) => <article key={number} className="bg-paper p-6 lg:min-h-64 lg:p-8"><span className="font-mono text-[11px] text-primary">{number}</span><h3 className="mt-10 font-serif text-2xl font-semibold">{title}</h3><p className="mt-4 text-[15px] leading-7 text-soft">{text}</p></article>)}
             </div>
-          </div>
-        </section>
 
-        <aside data-reveal className="report-bleed relative bg-ink py-14 text-paper sm:py-20">
-          <div className="mx-auto grid max-w-6xl gap-6 px-5 sm:grid-cols-12 sm:items-start sm:px-8">
-
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/45 sm:col-span-3 sm:pt-3">Uitgangspunt</p>
-            <blockquote className="sm:col-span-9">
-              <p className="max-w-[26ch] font-serif text-[clamp(1.6rem,3.6vw,2.6rem)] font-medium leading-[1.12]">
-                Wie de identiteit bezit, bezit de markt. <em className="font-light italic text-paper/70">Daarom hoort ze bij de speler.</em>
-              </p>
+            <blockquote className="mt-14 grid border-l-4 border-primary bg-petrol px-6 py-10 text-paper lg:grid-cols-12 lg:px-10 lg:py-14">
+              <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-paper/60 lg:col-span-3">Strategische conclusie</p>
+              <p className="mt-5 max-w-[34ch] font-serif text-3xl font-semibold leading-tight lg:col-span-8 lg:col-start-5 lg:mt-0 lg:text-4xl">OCA wordt geen vierde platform. Het wordt de neutrale laag die bestaande sterktes verbindt.</p>
             </blockquote>
           </div>
-        </aside>
+        </section>
 
-        <section data-reveal className="grid scroll-mt-20 gap-10 border-t border-border py-16 md:grid-cols-2 md:gap-8 sm:py-24">
-          <div id="rating" className="scroll-mt-20">
-            <SectionLabel number="04">Universele rating</SectionLabel>
-            <h2 className="mt-4 font-serif text-3xl font-medium leading-tight">Eén nieuwe, vergelijkbare waarheid</h2>
-            <p className="mt-4 max-w-[42ch] text-[15px] leading-relaxed text-soft">De OCA Rating probeert bestaande cijfers niet cosmetisch te vertalen. Ze bouwt een transparante standaard uit resultaten binnen het federatieve netwerk.</p>
-            <div className="mt-6 space-y-2">
-              {[["Lokaal resultaat", "geverifieerd"], ["Federatieve update", "gesynchroniseerd"], ["OCA Rating", "universeel"]].map(([label, value], index) => (
-                <div key={label} className={`report-frost flex items-center justify-between rounded-[3px] px-4 py-3 ${index === 2 ? "ring-1 ring-inset ring-primary/25" : ""}`}>
-                  <span className="font-mono text-[11px] text-soft">{label}</span><span className={`font-mono text-[11px] ${index === 2 ? "text-primary" : "text-mist"}`}>{value}</span>
+        <section id="standaard" data-reveal className="scroll-mt-20 border-b border-border bg-linen/50">
+          <div className="mx-auto max-w-[88rem] px-5 py-20 md:px-8 lg:px-10 lg:py-28">
+            <ChapterIntro number="02" kicker="De open standaard" title="Van losse ecosystemen naar één federatief protocol">
+              <p className="mt-7 max-w-[58ch] text-[17px] leading-7 text-soft">OCA organiseert geen overname van functies. Het definieert de afspraken waarmee bestaande partijen identiteit, resultaten en integriteit betrouwbaar kunnen uitwisselen.</p>
+            </ChapterIntro>
+
+            <div className="mt-16 grid gap-10 lg:grid-cols-12">
+              <div className="lg:col-span-4"><p className="font-mono text-[11px] uppercase tracking-[0.16em] text-primary">2.1 / Rollen en regie</p><h3 className="mt-4 max-w-[16ch] font-serif text-3xl font-semibold">Iedere partij brengt een eigen sterkte in.</h3></div>
+              <div className="overflow-hidden border-t border-ink/30 lg:col-span-8">
+                {roles.map(([name, role, text]) => <div key={name} className="grid gap-2 border-b border-ink/15 py-5 sm:grid-cols-[8rem_11rem_1fr] sm:gap-5"><p className="font-serif text-xl font-semibold">{name}</p><p className="font-mono text-[10px] uppercase tracking-[0.1em] text-primary sm:pt-1.5">{role}</p><p className="text-[15px] leading-6 text-soft">{text}</p></div>)}
+              </div>
+            </div>
+
+            <div className="mt-20 grid gap-10 border-t border-ink/25 pt-14 lg:grid-cols-12">
+              <div className="lg:col-span-4"><p className="font-mono text-[11px] uppercase tracking-[0.16em] text-primary">2.2 / Identiteit en data</p><h3 className="mt-4 max-w-[16ch] font-serif text-3xl font-semibold">De speler blijft de bron van vertrouwen.</h3><p className="mt-5 max-w-[38ch] text-[16px] leading-7 text-soft">Een Global_ID verbindt het vertrouwde account met deelnemende diensten. Persoonlijke datakluizen bewaren geschiedenis en toestemming onder controle van de speler.</p></div>
+              <div className="lg:col-span-8">
+                <ol className="grid gap-px border border-border bg-border sm:grid-cols-4">
+                  {[["01", "Vertrouwd account"], ["02", "Global_ID"], ["03", "Gerichte toestemming"], ["04", "Draagbare historie"]].map(([number, label]) => <li key={number} className="relative min-h-36 bg-paper p-5"><span className="font-mono text-[10px] text-primary">{number}</span><p className="mt-10 font-serif text-xl font-semibold">{label}</p></li>)}
+                </ol>
+                <blockquote className="mt-8 border-l border-primary pl-6"><p className="max-w-[30ch] font-serif text-3xl font-semibold leading-tight">“Wie de identiteit bezit, bezit de markt.”</p><footer className="mt-3 text-[15px] text-soft">Daarom hoort ze bij de speler.</footer></blockquote>
+              </div>
+            </div>
+
+            <div className="mt-20 grid gap-10 border-t border-ink/25 pt-14 lg:grid-cols-12">
+              <div className="lg:col-span-4"><p className="font-mono text-[11px] uppercase tracking-[0.16em] text-primary">2.3 / Rating en integriteit</p><h3 className="mt-4 max-w-[17ch] font-serif text-3xl font-semibold">Vergelijkbare resultaten, controleerbare besluiten.</h3></div>
+              <div className="lg:col-span-8">
+                <div className="border-y border-ink/25 py-6">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-mist">Protocolstroom</p>
+                  <div className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr] sm:items-center">
+                    {["Geverifieerd resultaat", "OCA Rating", "Fair-playbesluit"].map((label, index) => <div key={label} className="contents"><div className="border border-ink/20 bg-paper p-4 font-mono text-[11px] text-ink">{label}</div>{index < 2 && <span aria-hidden="true" className="hidden text-center text-primary sm:block">→</span>}</div>)}
+                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
-          <div id="integriteit" className="scroll-mt-20 md:border-l md:border-border md:pl-8">
-            <SectionLabel number="05">Collectieve integriteit</SectionLabel>
-            <h2 className="mt-4 font-serif text-3xl font-medium leading-tight">Gedeelde signalen. Onafhankelijk beroep.</h2>
-            <p className="mt-4 max-w-[42ch] text-[15px] leading-relaxed text-soft">Onafhankelijke detectiemodules delen signalen. Pas na consensus volgt een netwerkbrede maatregel, met een Fair Play Commissie voor transparant beroep.</p>
-            <div className="report-frost mt-6 rounded-[3px] p-5">
-              <div className="flex items-end justify-between gap-4"><span className="font-mono text-[10px] uppercase tracking-[0.14em] text-mist">Besluitvorming</span><span className="font-serif text-2xl text-primary">2+ signalen</span></div>
-              <div className="mt-4 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 font-mono text-[9px] text-soft"><span>detectie</span><span>→</span><span>consensus</span><span>→</span><span>beroep</span></div>
+                <div className="mt-8 grid gap-8 sm:grid-cols-2">
+                  <div><h4 className="font-serif text-2xl font-semibold">Universele OCA Rating</h4><p className="mt-3 text-[15px] leading-7 text-soft">Bestaande cijfers worden niet cosmetisch vertaald. De standaard berekent een vergelijkbare rating uit geverifieerde resultaten binnen het federatieve netwerk.</p></div>
+                  <div><h4 className="font-serif text-2xl font-semibold">Collectieve integriteit</h4><p className="mt-3 text-[15px] leading-7 text-soft">Onafhankelijke modules delen signalen. Een netwerkbrede maatregel volgt pas na consensus, met transparant beroep bij een Fair Play Commissie.</p></div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="uitrol" data-reveal className="scroll-mt-20 border-t border-border py-16 sm:py-24">
-          <SectionLabel number="06">Institutionele uitrol</SectionLabel>
-          <div className="mt-4 grid gap-8 sm:grid-cols-12">
-            <h2 className="max-w-[20ch] font-serif text-3xl font-medium leading-tight sm:col-span-5 sm:text-4xl">Van digitaal protocol naar publiek netwerk</h2>
-            <div className="grid gap-px overflow-hidden rounded-[3px] border border-border bg-border sm:col-span-7 sm:grid-cols-3">
-              {[["Bibliotheken", "Schaakclub in een Doos voor digitale inclusie en lokale ontmoeting."], ["Zorg", "Toegankelijke schaakprogramma’s voor cognitieve gezondheid en verbinding."], ["Europa", "Aansluiting op digitale soevereiniteit, DMA en publieke R&D-financiering."]].map(([title, text]) => (
-                <article key={title} className="bg-paper p-5 transition-colors hover:bg-linen/60"><h3 className="font-serif text-lg font-medium">{title}</h3><p className="mt-3 text-[13px] leading-relaxed text-soft">{text}</p></article>
-              ))}
+        <section id="toepassing" data-reveal className="scroll-mt-20 border-b border-border">
+          <div className="mx-auto max-w-[88rem] px-5 py-20 md:px-8 lg:px-10 lg:py-28">
+            <ChapterIntro number="03" kicker="Publieke toepassing" title="Een digitaal protocol wordt pas publiek wanneer mensen het kunnen gebruiken.">
+              <p className="mt-7 max-w-[58ch] text-[17px] leading-7 text-soft">De standaard krijgt betekenis in omgevingen waar toegang, gezondheid en publieke digitale infrastructuur samenkomen.</p>
+            </ChapterIntro>
+            <div className="mt-14 lg:ml-[calc(33.333%+1.7rem)]">
+              {[
+                ["Bibliotheken", "Digitale inclusie", "Schaakclub in een Doos brengt online spel en lokale ontmoeting samen."],
+                ["Zorg", "Cognitieve gezondheid", "Toegankelijke schaakprogramma’s ondersteunen verbinding en mentale activiteit."],
+                ["Europa", "Digitale soevereiniteit", "Open standaarden sluiten aan bij publieke R&D, interoperabiliteit en de doelen van de DMA."],
+              ].map(([title, label, text], index) => <article key={title} className="grid gap-3 border-t border-ink/25 py-7 sm:grid-cols-[3rem_10rem_1fr] sm:gap-5"><span className="font-mono text-[11px] text-primary">0{index + 1}</span><div><h3 className="font-serif text-2xl font-semibold">{title}</h3><p className="mt-1 font-mono text-[9px] uppercase tracking-[0.12em] text-mist">{label}</p></div><p className="max-w-[42ch] text-[15px] leading-7 text-soft">{text}</p></article>)}
             </div>
           </div>
         </section>
 
-        <section id="roadmap" data-reveal className="scroll-mt-20 border-t border-border py-16 sm:py-24">
-          <SectionLabel number="07">Vierfasen-roadmap</SectionLabel>
-          <h2 className="mt-4 max-w-[24ch] font-serif text-3xl font-medium leading-tight sm:text-4xl">Van oprichting naar een wereldwijde standaard</h2>
-          <ol className="relative mt-10 space-y-7 border-l border-border pl-8 sm:pl-10">
-            {[
-              ["Fase 01", "Oprichting", "Maanden 1–3", "Belgische VZW registreren en het Founding Charter met kernpartners tekenen."],
-              ["Fase 02", "Protocolontwikkeling", "Maanden 4–9", "API-standaarden en de open referentie-implementatie definiëren."],
-              ["Fase 03", "Institutionele uitrol", "Maanden 10–15", "Pilots starten in bibliotheken en woonzorgcentra in Vlaanderen en Nederland."],
-              ["Fase 04", "Publieke confrontatie", "Maand 16+", "De OCA Rating wereldwijd lanceren en de markt uitnodigen tot conformiteit."],
-            ].map(([phase, title, timing, text], index) => (
-              <li key={phase} className="relative">
-                <span className={`absolute -left-[37px] top-1.5 size-3.5 rounded-full ring-1 ring-inset ring-primary sm:-left-[45px] ${index === 3 ? "bg-primary" : "bg-paper"}`} />
-                <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1"><span className={`font-mono text-[10px] uppercase tracking-[0.14em] ${index === 3 ? "text-primary" : "text-mist"}`}>{phase}</span><h3 className="font-serif text-lg font-medium">{title}</h3><span className="font-mono text-[10px] text-mist">{timing}</span></div>
-                <p className="mt-2 max-w-[52ch] text-[14px] leading-relaxed text-soft">{text}</p>
-              </li>
-            ))}
-          </ol>
+        <section id="uitvoering" data-reveal className="scroll-mt-20 bg-petrol text-paper">
+          <div className="mx-auto max-w-[88rem] px-5 py-20 md:px-8 lg:px-10 lg:py-28">
+            <header className="grid gap-6 lg:grid-cols-12 lg:gap-10">
+              <div className="lg:col-span-4"><p className="font-mono text-[11px] uppercase tracking-[0.16em] text-signal">04 / Uitvoering</p><p aria-hidden="true" className="mt-5 font-serif text-7xl leading-none text-paper/12 lg:text-8xl">04</p></div>
+              <div className="lg:col-span-8"><h2 className="max-w-[18ch] font-serif text-[2.5rem] font-semibold leading-[1.02] sm:text-5xl lg:text-6xl">Van oprichting naar een wereldwijde standaard</h2><p className="mt-7 max-w-[56ch] text-[17px] leading-7 text-paper/72">Vier opeenvolgende fasen bouwen juridische legitimiteit, technische werking en publieke toepassing gecontroleerd op.</p></div>
+            </header>
+            <ol className="mt-16 border-t border-paper/30 lg:ml-[calc(33.333%+1.7rem)]">
+              {phases.map(([number, timing, title, text], index) => <li key={number} className="grid gap-4 border-b border-paper/20 py-7 sm:grid-cols-[3rem_9rem_13rem_1fr] sm:gap-5"><span className={`font-mono text-[11px] ${index === phases.length - 1 ? "text-signal" : "text-paper/50"}`}>{number}</span><span className="font-mono text-[10px] uppercase tracking-[0.1em] text-paper/55">{timing}</span><h3 className="font-serif text-xl font-semibold">{title}</h3><p className="max-w-[42ch] text-[15px] leading-6 text-paper/70">{text}</p></li>)}
+            </ol>
+          </div>
         </section>
 
         <ReportAssistant />
       </main>
 
-      <footer className="relative bg-ink text-paper">
-        <div className="mx-auto flex max-w-6xl flex-col gap-5 border-t border-paper/14 px-5 py-8 sm:flex-row sm:items-center sm:px-8">
-          <div className="flex items-center gap-2.5">
-            <span aria-hidden="true" className="grid size-5 shrink-0 grid-cols-2 grid-rows-2 overflow-hidden rounded-[2px] ring-1 ring-inset ring-paper/25">
-              <span className="bg-paper" /><span /><span /><span className="bg-paper" />
-            </span>
-            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-paper/55">Open Chess Alliance · Brussel · 2025</p>
-          </div>
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 sm:ml-auto sm:justify-end">
-            <p className="text-[12px] text-paper/55">Architectuur &amp; Platform door <a href="https://delplanche.cloud" target="_blank" rel="noreferrer" className="text-paper/85 underline decoration-paper/25 underline-offset-4 transition-colors hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">Delplanche</a></p>
-            <a href="#top" className="font-mono text-[10px] uppercase tracking-[0.14em] text-paper/55 transition-colors hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">Naar boven ↑</a>
-          </div>
+      <footer className="border-t border-paper/20 bg-ink text-paper">
+        <div className="mx-auto grid max-w-[88rem] gap-8 px-5 py-9 md:px-8 sm:grid-cols-[1fr_auto] sm:items-center lg:px-10">
+          <div className="flex min-w-0 items-center gap-3"><OcaMark inverse /><p className="min-w-0 font-mono text-[10px] uppercase tracking-[0.13em] text-paper/60">Open Chess Alliance · Brussel · Strategisch rapport 2025</p></div>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 sm:justify-end"><p className="text-[12px] text-paper/60">Architectuur &amp; Platform door <a href="https://delplanche.cloud" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-paper underline decoration-paper/30 underline-offset-4 hover:decoration-paper">Delplanche <ArrowUpRight aria-hidden="true" className="size-3" /></a></p><a href="#top" className="font-mono text-[10px] uppercase tracking-[0.12em] text-paper/60 hover:text-paper">Naar boven ↑</a></div>
         </div>
       </footer>
     </div>
