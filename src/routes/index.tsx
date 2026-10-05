@@ -265,7 +265,7 @@ function OpenChessReport() {
           </div>
           <div className="flex items-end py-10 lg:py-14">
             <div className="max-w-5xl">
-              <p className="report-reveal font-mono text-[11px] uppercase tracking-[0.18em] text-signal">Open Chess Alliance</p>
+              <p className="report-reveal font-mono text-[11px] uppercase tracking-[0.18em] text-paper/85">Open Chess Alliance</p>
               <h1 className="report-reveal mt-5 max-w-[15ch] font-serif text-[3.25rem] font-semibold leading-[0.96] sm:text-7xl lg:text-[6.6rem]">Een open standaard voor het digitale schaakspel</h1>
               <p className="report-reveal mt-7 max-w-[55ch] text-[17px] leading-7 text-paper/78 sm:text-xl sm:leading-8">Een strategische blauwdruk voor draagbare identiteit, vergelijkbare ratings en gedeelde integriteit — zonder een nieuw platform op te leggen.</p>
             </div>
@@ -283,7 +283,7 @@ function OpenChessReport() {
               <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-primary">Managementsamenvatting</p>
               <h2 className="mt-5 max-w-[13ch] font-serif text-4xl font-semibold leading-[1.06] lg:text-5xl">Niet nóg een platform. Wel één gedeelde onderlaag.</h2>
             </div>
-            <div className="lg:col-span-7 lg:col-start-6">
+            <div className="lg:col-span-8 lg:col-start-5">
               <p className="max-w-[52ch] font-serif text-2xl leading-snug text-ink lg:text-3xl">De digitale schaakwereld groeit, maar identiteit, reputatie en speldata blijven opgesloten in afzonderlijke systemen.</p>
               <div className="mt-10 grid border-t border-ink/25 sm:grid-cols-3">
                 {[
@@ -302,7 +302,7 @@ function OpenChessReport() {
               <p className="mt-7 max-w-[58ch] text-[17px] leading-7 text-soft">De schaakeconomie beweegt richting een verdubbeling, terwijl spelersprofielen, ratings en reputatie verdeeld blijven over gesloten ecosystemen. Groei zonder interoperabiliteit versterkt bestaande poortwachters.</p>
             </ChapterIntro>
 
-            <div className="mt-14 grid border-y border-ink/25 lg:ml-[calc(33.333%+1.7rem)] lg:grid-cols-3">
+            <div className="mt-14 grid border-y border-ink/25 lg:ml-[calc(33.333%+0.833rem)] lg:grid-cols-3">
               {[["Markt 2025", "$3,70 mld"], ["Prognose 2032", "$7,64 mld"], ["Jaarlijkse groei", "10,91% CAGR"]].map(([label, value]) => <dl key={label} className="border-b border-ink/15 py-6 lg:border-b-0 lg:border-r lg:px-7 lg:first:pl-0 lg:last:border-r-0"><dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-mist">{label}</dt><dd className="mt-3 font-serif text-3xl font-semibold lg:text-4xl">{value}</dd></dl>)}
             </div>
 
@@ -367,7 +367,7 @@ function OpenChessReport() {
             <ChapterIntro number="03" kicker="Publieke toepassing" title="Een digitaal protocol wordt pas publiek wanneer mensen het kunnen gebruiken.">
               <p className="mt-7 max-w-[58ch] text-[17px] leading-7 text-soft">De standaard krijgt betekenis in omgevingen waar toegang, gezondheid en publieke digitale infrastructuur samenkomen.</p>
             </ChapterIntro>
-            <div className="mt-14 lg:ml-[calc(33.333%+1.7rem)]">
+            <div className="mt-14 lg:ml-[calc(33.333%+0.833rem)]">
               {[
                 ["Bibliotheken", "Digitale inclusie", "Schaakclub in een Doos brengt online spel en lokale ontmoeting samen."],
                 ["Zorg", "Cognitieve gezondheid", "Toegankelijke schaakprogramma’s ondersteunen verbinding en mentale activiteit."],
@@ -383,7 +383,7 @@ function OpenChessReport() {
               <div className="lg:col-span-4"><p className="font-mono text-[11px] uppercase tracking-[0.16em] text-signal">04 / Uitvoering</p><p aria-hidden="true" className="mt-5 font-serif text-7xl leading-none text-paper/12 lg:text-8xl">04</p></div>
               <div className="lg:col-span-8"><h2 className="max-w-[18ch] font-serif text-[2.5rem] font-semibold leading-[1.02] sm:text-5xl lg:text-6xl">Van oprichting naar een wereldwijde standaard</h2><p className="mt-7 max-w-[56ch] text-[17px] leading-7 text-paper/72">Vier opeenvolgende fasen bouwen juridische legitimiteit, technische werking en publieke toepassing gecontroleerd op.</p></div>
             </header>
-            <ol className="mt-16 border-t border-paper/30 lg:ml-[calc(33.333%+1.7rem)]">
+            <ol className="mt-16 border-t border-paper/30 lg:ml-[calc(33.333%+0.833rem)]">
               {phases.map(([number, timing, title, text], index) => <li key={number} className="grid gap-4 border-b border-paper/20 py-7 sm:grid-cols-[3rem_9rem_13rem_1fr] sm:gap-5"><span className={`font-mono text-[11px] ${index === phases.length - 1 ? "text-signal" : "text-paper/50"}`}>{number}</span><span className="font-mono text-[10px] uppercase tracking-[0.1em] text-paper/55">{timing}</span><h3 className="font-serif text-xl font-semibold">{title}</h3><p className="max-w-[42ch] text-[15px] leading-6 text-paper/70">{text}</p></li>)}
             </ol>
           </div>
