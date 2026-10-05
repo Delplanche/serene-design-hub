@@ -8,5 +8,5 @@
 - [x] Vereenvoudig de footer en voeg de Delplanche-vermelding toe
 - [x] Versterk de donkere typografie en controleer mobiel en desktop
 - [x] Nieuwe mobiele menubalk met uitklapbare inhoudsopgave
-- [ ] Herbouw het rapport als een digitaal Europees witboek
-- [ ] Controleer de nieuwe inhoud, navigatie en vormgeving op mobiel, tablet en desktop
+- [x] Herbouw het rapport als een digitaal Europees witboek
+- [x] Controleer de nieuwe inhoud, navigatie en vormgeving op mobiel, tablet en desktop
