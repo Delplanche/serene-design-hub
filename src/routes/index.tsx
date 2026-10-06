@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { ArrowDown, ArrowUpRight, LoaderCircle, MessageCircle, Send } from "lucide-react";
+import { ArrowDown, ArrowUpRight, LoaderCircle, MessageCircle, Moon, Send, Sun } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import marbleBoardUrl from "@/assets/marmeren-schaakbord.webp";
 import { Button } from "@/components/ui/button";
@@ -26,8 +26,30 @@ const chapters = [
   ["02", "De open standaard", "standaard"],
   ["03", "Publieke toepassing", "toepassing"],
   ["04", "Uitvoering", "uitvoering"],
-  ["AI", "Vraag het rapport", "vraag"],
 ] as const;
+
+function ThemeToggle() {
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    const current = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+    setTheme(current);
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    document.documentElement.classList.toggle("dark", next === "dark");
+    localStorage.setItem("oca-theme", next);
+    setTheme(next);
+  };
+
+  return (
+    <Button type="button" variant="ghost" size="icon" onClick={toggleTheme} aria-label={theme === "dark" ? "Licht thema gebruiken" : "Donker thema gebruiken"} className="size-11 rounded-none text-ink shadow-none hover:bg-linen">
+      {theme === "dark" ? <Sun aria-hidden="true" className="size-4" /> : <Moon aria-hidden="true" className="size-4" />}
+    </Button>
+  );
+}
 
 const roles = [
   ["OCA", "Neutrale regie", "Beheert de standaard, toetst conformiteit en bewaakt het gemeenschappelijk belang."],
@@ -125,7 +147,7 @@ function ReportHeader() {
 
   return (
     <header ref={headerRef} className="sticky top-0 z-50 border-b border-border bg-paper/95 backdrop-blur-md">
-      <nav aria-label="Rapportnavigatie" className="mx-auto grid h-16 max-w-[88rem] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-5 lg:px-10">
+      <nav aria-label="Rapportnavigatie" className="mx-auto grid h-16 max-w-[88rem] grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-1 px-5 lg:px-10">
         <a href="#top" onClick={() => setOpen(false)} className="flex shrink-0 items-center gap-3 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
           <OcaMark />
           <span className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-ink">OCA</span>
@@ -147,6 +169,12 @@ function ReportHeader() {
           })}
         </div>
 
+        <div className="ml-auto hidden items-center border-l border-border lg:flex">
+          <a href="#vraag" className="px-4 text-[13px] font-medium text-soft hover:text-ink">Vraag het rapport</a>
+          <ThemeToggle />
+        </div>
+
+        <ThemeToggle />
         <Button type="button" variant="outline" size="icon" aria-expanded={open} aria-controls="mobile-contents" aria-label={open ? "Inhoudsopgave sluiten" : "Inhoudsopgave openen"} onClick={() => setOpen((value) => !value)} className="relative size-11 rounded-none border-ink/20 bg-transparent shadow-none lg:hidden">
           <span aria-hidden="true" className={`absolute h-px w-5 bg-ink transition-transform ${open ? "rotate-45" : "-translate-y-1"}`} />
           <span aria-hidden="true" className={`absolute h-px w-5 bg-ink transition-transform ${open ? "-rotate-45" : "translate-y-1"}`} />
@@ -170,6 +198,7 @@ function ReportHeader() {
               );
             })}
           </ol>
+          <a href="#vraag" onClick={() => setOpen(false)} className="mt-5 flex min-h-12 items-center justify-between border-b border-border py-3 text-[15px] font-medium text-ink">Vraag het rapport <MessageCircle aria-hidden="true" className="size-4 text-primary" /></a>
         </div>
       </div>
 
@@ -219,29 +248,29 @@ function ReportAssistant() {
   }
 
   return (
-    <section id="vraag" data-reveal className="scroll-mt-20 bg-ink text-paper">
+    <section id="vraag" data-reveal className="scroll-mt-20 border-y border-border bg-linen text-ink">
       <div className="mx-auto grid max-w-[88rem] gap-10 px-5 py-20 md:px-8 lg:grid-cols-12 lg:gap-10 lg:px-10 lg:py-28">
         <div className="lg:col-span-4">
-          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-signal">Interactieve leeshulp</p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-primary">Interactieve leeshulp</p>
           <h2 className="mt-5 max-w-[11ch] font-serif text-4xl font-semibold leading-[1.03] lg:text-6xl">Vraag het rapport</h2>
-          <p className="mt-6 max-w-[35ch] text-[16px] leading-7 text-paper/72">Stel een vrije vraag. Het antwoord gebruikt uitsluitend de inhoud van deze publicatie en benoemt wat niet wordt gespecificeerd.</p>
+          <p className="mt-6 max-w-[35ch] text-[16px] leading-7 text-soft">Stel een vrije vraag. Het antwoord gebruikt uitsluitend de inhoud van deze publicatie en benoemt wat niet wordt gespecificeerd.</p>
         </div>
         <div className="lg:col-span-7 lg:col-start-6">
-          <form onSubmit={handleSubmit} className="border-t border-paper/25 pt-6">
-            <label htmlFor="report-question" className="font-mono text-[11px] uppercase tracking-[0.14em] text-paper/72">Uw vraag aan het rapport</label>
-            <Textarea id="report-question" suppressHydrationWarning value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Hoe bewaart OCA het eigenaarschap van spelersdata?" maxLength={500} rows={4} disabled={isAsking} className="mt-4 min-h-36 resize-y rounded-none border-paper/25 bg-paper/[0.04] px-4 py-4 text-[17px] leading-7 text-paper shadow-none placeholder:text-paper/42 focus-visible:ring-signal" />
+          <form onSubmit={handleSubmit} className="border-t border-ink/25 pt-6">
+            <label htmlFor="report-question" className="font-mono text-[11px] uppercase tracking-[0.14em] text-soft">Uw vraag aan het rapport</label>
+            <Textarea id="report-question" suppressHydrationWarning value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Hoe bewaart OCA het eigenaarschap van spelersdata?" maxLength={500} rows={4} disabled={isAsking} className="mt-4 min-h-36 resize-y rounded-none border-input bg-paper px-4 py-4 text-[17px] leading-7 text-ink shadow-none placeholder:text-mist focus-visible:ring-primary" />
             <div className="mt-4 grid grid-cols-[1fr_auto] items-center gap-4">
-              <span className="font-mono text-[10px] text-paper/55">{question.length} / 500</span>
-              <Button type="submit" disabled={question.trim().length < 3 || isAsking} className="h-11 rounded-none bg-signal px-5 text-paper shadow-none hover:bg-signal/90">
+              <span className="font-mono text-[10px] text-mist">{question.length} / 500</span>
+              <Button type="submit" disabled={question.trim().length < 3 || isAsking} className="h-11 rounded-none bg-primary px-5 text-primary-foreground shadow-none hover:bg-primary/90">
                 {isAsking ? <LoaderCircle aria-hidden="true" className="animate-spin" /> : <Send aria-hidden="true" />}
                 {isAsking ? "Rapport raadplegen" : "Vraag stellen"}
               </Button>
             </div>
           </form>
-          <div aria-live="polite" aria-busy={isAsking} className={isAsking || error || answer ? "mt-8 border-t border-paper/20 pt-8" : ""}>
-            {isAsking && <p className="flex items-center gap-3 text-[15px] text-paper/72"><LoaderCircle aria-hidden="true" className="size-4 animate-spin text-signal" />Het rapport wordt geraadpleegd…</p>}
-            {error && <p role="alert" className="border-l-2 border-destructive pl-4 text-[15px] leading-7 text-paper/85">{error}</p>}
-            {answer && <div className="grid gap-4 sm:grid-cols-[auto_1fr]"><MessageCircle aria-hidden="true" className="mt-1 size-5 text-signal" /><p className="max-w-[58ch] whitespace-pre-wrap font-serif text-xl leading-relaxed text-paper sm:text-2xl">{answer}</p></div>}
+          <div aria-live="polite" aria-busy={isAsking} className={isAsking || error || answer ? "mt-8 border-t border-border pt-8" : ""}>
+            {isAsking && <p className="flex items-center gap-3 text-[15px] text-soft"><LoaderCircle aria-hidden="true" className="size-4 animate-spin text-primary" />Het rapport wordt geraadpleegd…</p>}
+            {error && <p role="alert" className="border-l-2 border-destructive pl-4 text-[15px] leading-7 text-ink">{error}</p>}
+            {answer && <div className="grid gap-4 sm:grid-cols-[auto_1fr]"><MessageCircle aria-hidden="true" className="mt-1 size-5 text-primary" /><p className="max-w-[58ch] whitespace-pre-wrap font-serif text-xl leading-relaxed text-ink sm:text-2xl">{answer}</p></div>}
           </div>
         </div>
       </div>

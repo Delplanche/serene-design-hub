@@ -71,6 +71,8 @@
   --color-frost: var(--frost);
   --color-petrol: var(--petrol);
   --color-signal: var(--signal);
+  --color-night: var(--night);
+  --color-chalk: var(--chalk);
 }
 
 :root {
@@ -85,6 +87,8 @@
   --frost: oklch(0.974 0.005 125 / 0.94);
   --petrol: oklch(0.382 0.058 207);
   --signal: oklch(0.52 0.145 30);
+  --night: oklch(0.16 0.012 250);
+  --chalk: oklch(0.96 0.006 110);
   --background: var(--paper);
   --foreground: var(--ink);
   --card: var(--linen);
@@ -130,6 +134,8 @@
   --frost: oklch(0.19 0.01 250 / 0.94);
   --petrol: oklch(0.75 0.085 190);
   --signal: oklch(0.72 0.12 28);
+  --night: oklch(0.145 0.01 250);
+  --chalk: oklch(0.96 0.006 110);
   --background: var(--paper);
   --foreground: var(--ink);
   --card: var(--linen);
