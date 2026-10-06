@@ -116,11 +116,11 @@ function useScrollReveal() {
 
 function OcaMark({ inverse = false }: { inverse?: boolean }) {
   return (
-    <span aria-hidden="true" className={`grid size-7 shrink-0 grid-cols-2 grid-rows-2 overflow-hidden border ${inverse ? "border-paper/35" : "border-ink/30"}`}>
-      <span className={inverse ? "bg-paper" : "bg-ink"} />
+    <span aria-hidden="true" className={`grid size-7 shrink-0 grid-cols-2 grid-rows-2 overflow-hidden border ${inverse ? "border-chalk/35" : "border-ink/30"}`}>
+      <span className={inverse ? "bg-chalk" : "bg-ink"} />
       <span />
       <span />
-      <span className={inverse ? "bg-paper" : "bg-ink"} />
+      <span className={inverse ? "bg-chalk" : "bg-ink"} />
     </span>
   );
 }
