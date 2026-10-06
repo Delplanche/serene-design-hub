@@ -10,3 +10,6 @@
 - [x] Nieuwe mobiele menubalk met uitklapbare inhoudsopgave
 - [x] Herbouw het rapport als een digitaal Europees witboek
 - [x] Controleer de nieuwe inhoud, navigatie en vormgeving op mobiel, tablet en desktop
+- [ ] Herbouw de vormgeving als één protocolgedreven publicatiesysteem
+- [ ] Voeg een systeemgestuurde, onthouden licht-donkerkeuze toe
+- [ ] Controleer beide thema’s op mobiel, tablet en desktop
