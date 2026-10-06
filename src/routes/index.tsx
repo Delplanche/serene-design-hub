@@ -32,13 +32,13 @@ function ThemeToggle() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
-    const current = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+    const current = document.documentElement.dataset["theme"] === "dark" ? "dark" : "light";
     setTheme(current);
   }, []);
 
   const toggleTheme = () => {
     const next = theme === "dark" ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
+    document.documentElement.dataset["theme"] = next;
     document.documentElement.classList.toggle("dark", next === "dark");
     localStorage.setItem("oca-theme", next);
     setTheme(next);
