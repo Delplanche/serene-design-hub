@@ -1,0 +1,222 @@
+{
+  "meta": {
+    "title": "Informe estratégico — Open Chess Alliance",
+    "description": "Un plan para la soberanía digital mediante estándares abiertos de identidad, puntuación e integridad en el ajedrez digital.",
+    "reportTitle": "Informe oficial (edición PDF) — Open Chess Alliance",
+    "reportDescription": "La edición completa e imprimible del informe estratégico de Open Chess Alliance, con índice y todos los capítulos.",
+    "locale": "es_ES"
+  },
+  "ui": {
+    "skip": "Ir al contenido",
+    "nav": "Navegación del informe",
+    "contents": "Contenido del informe",
+    "openMenu": "Abrir el índice",
+    "closeMenu": "Cerrar el índice",
+    "strategic": "Informe estratégico",
+    "ask": "Pregunte al informe",
+    "settings": "Visualización e idioma",
+    "theme": "Tema",
+    "system": "Sistema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "language": "Idioma",
+    "readSummary": "Leer el resumen ejecutivo",
+    "officialReport": "Informe oficial",
+    "officialReportLead": "Lea o descargue la edición completa con índice.",
+    "downloadPdf": "Descargar en PDF",
+    "backToTop": "Volver arriba ↑",
+    "footerLine": "Open Chess Alliance · Bruselas · Informe estratégico 2025",
+    "builtBy": "Arquitectura y plataforma a cargo de",
+    "backToSite": "Volver al sitio web",
+    "contentsTitle": "Índice",
+    "edition": "Edición oficial · Versión 1.0 · Bruselas, 2025",
+    "printHint": "Seleccione «Guardar como PDF» en el cuadro de impresión.",
+    "summaryLabel": "Resumen ejecutivo",
+    "colophonTitle": "Colofón",
+    "colophonText": "Publicado por Open Chess Alliance, Bruselas. Esta edición recoge todo el contenido de la publicación en línea y puede compartirse libremente citando la fuente.",
+    "page": "Página"
+  },
+  "cover": {
+    "meta1": "Informe estratégico / OCA–01",
+    "meta2": "Bruselas · 2025",
+    "org": "Open Chess Alliance",
+    "title": "Un estándar abierto para el ajedrez digital",
+    "lead": "Un plan estratégico para una identidad portable, puntuaciones comparables y una integridad compartida, sin imponer una nueva plataforma.",
+    "imageAlt": "Tablero de ajedrez de mármol con piezas clásicas"
+  },
+  "summary": {
+    "title": "No otra plataforma más, sino una base compartida.",
+    "lead": "El mundo del ajedrez digital crece, pero la identidad, la reputación y los datos de juego siguen encerrados en sistemas separados.",
+    "items": [
+      [
+        "Problema",
+        "La separación de identidades, puntuaciones y decisiones sobre integridad limita la confianza y la capacidad de elección."
+      ],
+      [
+        "Propuesta",
+        "Un estándar neutral conecta las plataformas existentes sin sustituir sus rasgos propios."
+      ],
+      [
+        "Resultado",
+        "El jugador mantiene el control; los operadores del mercado compiten en calidad sobre una infraestructura compartida."
+      ]
+    ]
+  },
+  "chapters": [
+    "Por qué intervenir",
+    "El estándar abierto",
+    "Aplicación pública",
+    "Ejecución"
+  ],
+  "context": {
+    "title": "El mercado crece. La confianza no sigue el ritmo.",
+    "intro": "La economía del ajedrez avanza hacia la duplicación, mientras los perfiles de los jugadores, las puntuaciones y la reputación siguen repartidos entre ecosistemas cerrados. El crecimiento sin interoperabilidad refuerza a los guardianes de acceso existentes.",
+    "stats": [
+      [
+        "Mercado en 2025",
+        "3.700 millones de dólares"
+      ],
+      [
+        "Previsión para 2032",
+        "7.640 millones de dólares"
+      ],
+      [
+        "Crecimiento anual",
+        "10,91 % CAGR"
+      ]
+    ],
+    "problems": [
+      [
+        "Fragmentación",
+        "Lichess, ChessBase y FIDE gestionan identidades, puntuaciones e infraestructuras separadas."
+      ],
+      [
+        "Propiedad de las plataformas",
+        "Actualmente, el historial de juego, los contactos y la reputación no acompañan automáticamente al jugador."
+      ],
+      [
+        "Poder de mercado",
+        "Los efectos de red limitan la capacidad de elección, la innovación y una cultura saludable del ajedrez digital."
+      ]
+    ],
+    "conclusionKicker": "Conclusión estratégica",
+    "conclusion": "OCA no será una cuarta plataforma. Será la capa neutral que conecte las fortalezas existentes."
+  },
+  "standard": {
+    "title": "De ecosistemas aislados a un protocolo federado común",
+    "intro": "OCA no asume las funciones de otros actores. Define los acuerdos que permiten a los participantes existentes intercambiar de forma fiable datos de identidad, resultados e integridad.",
+    "rolesKicker": "2.1 / Funciones y coordinación",
+    "rolesTitle": "Cada participante aporta una fortaleza propia.",
+    "roles": [
+      [
+        "OCA",
+        "Coordinación neutral",
+        "Gestiona el estándar, verifica la conformidad y vela por el interés común."
+      ],
+      [
+        "Lichess",
+        "Columna vertebral técnica",
+        "Aporta infraestructura de código abierto y experiencia con API públicas."
+      ],
+      [
+        "ChessBase",
+        "Alcance profesional",
+        "Conecta a usuarios profesionales, archivos de partidas y aplicaciones comerciales."
+      ],
+      [
+        "FIDE",
+        "Legitimidad institucional",
+        "Vincula el estándar con el deporte organizado y el reconocimiento oficial."
+      ]
+    ],
+    "identityKicker": "2.2 / Identidad y datos",
+    "identityTitle": "El jugador sigue siendo la fuente de confianza.",
+    "identityText": "Un Global_ID conecta la cuenta habitual con los servicios participantes. Los almacenes seguros de datos personales conservan el historial y los consentimientos bajo el control del jugador.",
+    "flow": [
+      "Cuenta habitual",
+      "Global_ID",
+      "Consentimiento específico",
+      "Historial portable",
+      "Resultado verificado",
+      "OCA Rating e integridad"
+    ],
+    "quote": "«Quien posee la identidad posee el mercado».",
+    "quoteNote": "Por eso debe pertenecer al jugador.",
+    "ratingKicker": "2.3 / Puntuación e integridad",
+    "ratingTitle": "Resultados comparables, decisiones verificables.",
+    "flowLabel": "Flujo del protocolo",
+    "ratingFlow": [
+      "Resultado verificado",
+      "OCA Rating",
+      "Decisión sobre juego limpio"
+    ],
+    "ratingTitleA": "OCA Rating universal",
+    "ratingTextA": "Las puntuaciones existentes no se convierten de forma meramente cosmética. El estándar calcula una puntuación comparable a partir de resultados verificados dentro de la red federada.",
+    "ratingTitleB": "Integridad colectiva",
+    "ratingTextB": "Módulos independientes comparten señales. Una medida aplicable a toda la red solo se adopta tras la coincidencia de dos o más señales, con un procedimiento de recurso transparente ante una Comisión de Juego Limpio independiente."
+  },
+  "application": {
+    "title": "Un protocolo digital solo adquiere carácter público cuando las personas pueden utilizarlo.",
+    "intro": "El estándar cobra sentido en entornos donde convergen el acceso, la salud y la infraestructura digital pública.",
+    "items": [
+      [
+        "Bibliotecas",
+        "Inclusión digital",
+        "Club de Ajedrez en una Caja combina el juego en línea con los encuentros locales."
+      ],
+      [
+        "Atención sociosanitaria",
+        "Salud cognitiva",
+        "Los programas de ajedrez accesibles fomentan los vínculos sociales y la actividad mental."
+      ],
+      [
+        "Europa",
+        "Soberanía digital",
+        "Los estándares abiertos se ajustan a la I+D pública, la interoperabilidad y los objetivos de la Digital Markets Act."
+      ]
+    ]
+  },
+  "execution": {
+    "title": "De la constitución a un estándar mundial",
+    "intro": "Cuatro fases sucesivas consolidan de forma controlada la legitimidad jurídica, el funcionamiento técnico y la aplicación pública.",
+    "phases": [
+      [
+        "Meses 1–3",
+        "Constitución",
+        "Registrar una asociación belga sin ánimo de lucro (VZW) y firmar el Founding Charter con los socios principales."
+      ],
+      [
+        "Meses 4–9",
+        "Desarrollo del protocolo",
+        "Definir los estándares de API y la implementación de referencia abierta."
+      ],
+      [
+        "Meses 10–15",
+        "Proyectos piloto institucionales",
+        "Iniciar proyectos piloto en bibliotecas y centros residenciales de cuidados en Flandes y los Países Bajos."
+      ],
+      [
+        "A partir del mes 16",
+        "Lanzamiento público",
+        "Lanzar OCA Rating a escala mundial e invitar al mercado a cumplir el estándar."
+      ]
+    ]
+  },
+  "assistant": {
+    "kicker": "Ayuda interactiva para la lectura",
+    "title": "Pregunte al informe",
+    "text": "Formule una pregunta libre. La respuesta utiliza exclusivamente el contenido de esta publicación, cita cifras y plazos concretos e indica qué aspectos no se especifican.",
+    "label": "Su pregunta al informe",
+    "placeholder": "¿Cómo preserva OCA la propiedad de los datos de los jugadores?",
+    "submit": "Enviar pregunta",
+    "asking": "Consultar el informe",
+    "consulting": "Consultando el informe…",
+    "sendError": "No se ha podido enviar la pregunta. Inténtelo de nuevo más tarde.",
+    "suggestionsLabel": "Preguntas de ejemplo",
+    "suggestions": [
+      "¿Qué tamaño tiene el mercado y a qué ritmo crece?",
+      "¿Qué ocurre en cada fase de la hoja de ruta?",
+      "¿Cómo funciona una medida de juego limpio?"
+    ]
+  }
+}
