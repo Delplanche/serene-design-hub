@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Check, Monitor, Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { LANGS, LANG_NAMES, homePath, reportPath, type Lang } from "@/content/i18n";
+import { LANGS, LANG_NAMES, type Lang } from "@/content/i18n";
 import type { Dict } from "@/content/locales/nl";
 
 export type ThemePref = "system" | "light" | "dark";
@@ -68,7 +68,7 @@ export function Preferences({ t, lang, page }: { t: Dict; lang: Lang; page: "hom
           <ul className="mt-2">
             {LANGS.map((l) => (
               <li key={l}>
-                <Link to={page === "home" ? homePath(l) : reportPath(l)} hrefLang={l} lang={l} className="flex min-h-10 items-center justify-between text-[14px] text-soft hover:text-ink aria-[current=page]:text-ink" aria-current={l === lang ? "page" : undefined}>
+                <Link {...langLinkProps(l, page)} hrefLang={l} lang={l} className="flex min-h-10 items-center justify-between text-[14px] text-soft hover:text-ink aria-[current=page]:text-ink" aria-current={l === lang ? "page" : undefined}>
                   <span><span className="mr-3 font-mono text-[10px] uppercase text-mist">{l}</span>{LANG_NAMES[l]}</span>
                   {l === lang && <Check aria-hidden="true" className="size-4 text-primary" />}
                 </Link>
@@ -79,4 +79,9 @@ export function Preferences({ t, lang, page }: { t: Dict; lang: Lang; page: "hom
       </PopoverContent>
     </Popover>
   );
+}
+
+export function langLinkProps(l: Lang, page: "home" | "report") {
+  if (page === "home") return l === "nl" ? ({ to: "/" } as const) : ({ to: "/$lang", params: { lang: l } } as const);
+  return l === "nl" ? ({ to: "/rapport" } as const) : ({ to: "/$lang/rapport", params: { lang: l } } as const);
 }
