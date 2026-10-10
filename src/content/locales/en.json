@@ -1,0 +1,222 @@
+{
+  "meta": {
+    "title": "Strategic Report — Open Chess Alliance",
+    "description": "A blueprint for digital sovereignty through open standards for identity, rating and integrity in digital chess.",
+    "reportTitle": "Official report (PDF edition) — Open Chess Alliance",
+    "reportDescription": "The complete, printable edition of the Open Chess Alliance strategic report, with a table of contents and all chapters.",
+    "locale": "en_GB"
+  },
+  "ui": {
+    "skip": "Skip to content",
+    "nav": "Report navigation",
+    "contents": "Report contents",
+    "openMenu": "Open table of contents",
+    "closeMenu": "Close table of contents",
+    "strategic": "Strategic report",
+    "ask": "Ask the report",
+    "settings": "Display and language",
+    "theme": "Theme",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark",
+    "language": "Language",
+    "readSummary": "Read the executive summary",
+    "officialReport": "Official report",
+    "officialReportLead": "Read or download the complete edition with a table of contents.",
+    "downloadPdf": "Download as PDF",
+    "backToTop": "Back to top ↑",
+    "footerLine": "Open Chess Alliance · Brussels · Strategic report 2025",
+    "builtBy": "Architecture & Platform by",
+    "backToSite": "Back to the site",
+    "contentsTitle": "Table of contents",
+    "edition": "Official edition · Version 1.0 · Brussels, 2025",
+    "printHint": "Choose ‘Save as PDF’ in the print dialogue.",
+    "summaryLabel": "Executive summary",
+    "colophonTitle": "Publication details",
+    "colophonText": "Published by the Open Chess Alliance, Brussels. This edition contains the full content of the online publication and may be shared freely with attribution.",
+    "page": "Page"
+  },
+  "cover": {
+    "meta1": "Strategic report / OCA–01",
+    "meta2": "Brussels · 2025",
+    "org": "Open Chess Alliance",
+    "title": "An open standard for digital chess",
+    "lead": "A strategic blueprint for portable identity, comparable ratings and shared integrity — without imposing a new platform.",
+    "imageAlt": "Marble chessboard with classic chess pieces"
+  },
+  "summary": {
+    "title": "Not another platform. One shared foundation.",
+    "lead": "The digital chess world is growing, but identity, reputation and game data remain locked within separate systems.",
+    "items": [
+      [
+        "Problem",
+        "Separate identities, ratings and integrity decisions limit trust and choice."
+      ],
+      [
+        "Proposal",
+        "A neutral standard connects existing platforms without replacing their distinctive character."
+      ],
+      [
+        "Outcome",
+        "Players retain control; market participants compete on quality over shared infrastructure."
+      ]
+    ]
+  },
+  "chapters": [
+    "Why intervene",
+    "The open standard",
+    "Public application",
+    "Implementation"
+  ],
+  "context": {
+    "title": "The market is growing. Trust is not keeping pace.",
+    "intro": "The chess economy is heading towards doubling in size, while player profiles, ratings and reputation remain scattered across closed ecosystems. Growth without interoperability strengthens existing gatekeepers.",
+    "stats": [
+      [
+        "Market in 2025",
+        "$3.70 bn"
+      ],
+      [
+        "Forecast for 2032",
+        "$7.64 bn"
+      ],
+      [
+        "Annual growth",
+        "10.91% CAGR"
+      ]
+    ],
+    "problems": [
+      [
+        "Fragmentation",
+        "Lichess, ChessBase and FIDE maintain separate identities, ratings and infrastructure."
+      ],
+      [
+        "Platform ownership",
+        "Game history, connections and reputation do not currently move seamlessly with the player."
+      ],
+      [
+        "Market power",
+        "Network effects limit choice, innovation and a healthy digital chess culture."
+      ]
+    ],
+    "conclusionKicker": "Strategic conclusion",
+    "conclusion": "OCA will not become a fourth platform. It will be the neutral layer connecting existing strengths."
+  },
+  "standard": {
+    "title": "From separate ecosystems to a single federated protocol",
+    "intro": "OCA does not take over functions. It defines the rules that enable existing participants to exchange identity, results and integrity information reliably.",
+    "rolesKicker": "2.1 / Roles and governance",
+    "rolesTitle": "Each participant brings a distinct strength.",
+    "roles": [
+      [
+        "OCA",
+        "Neutral governance",
+        "Maintains the standard, assesses compliance and safeguards the common interest."
+      ],
+      [
+        "Lichess",
+        "Technical backbone",
+        "Contributes open-source infrastructure and experience with public APIs."
+      ],
+      [
+        "ChessBase",
+        "Professional reach",
+        "Connects professional users, game archives and commercial applications."
+      ],
+      [
+        "FIDE",
+        "Institutional legitimacy",
+        "Connects the standard with organised sport and official recognition."
+      ]
+    ],
+    "identityKicker": "2.2 / Identity and data",
+    "identityTitle": "The player remains the source of trust.",
+    "identityText": "A Global_ID connects the trusted account to participating services. Personal data vaults keep history and consent under the player's control.",
+    "flow": [
+      "Trusted account",
+      "Global_ID",
+      "Specific consent",
+      "Portable history",
+      "Verified result",
+      "OCA Rating & integrity"
+    ],
+    "quote": "‘Whoever owns identity owns the market.’",
+    "quoteNote": "That is why it belongs to the player.",
+    "ratingKicker": "2.3 / Rating and integrity",
+    "ratingTitle": "Comparable results, verifiable decisions.",
+    "flowLabel": "Protocol flow",
+    "ratingFlow": [
+      "Verified result",
+      "OCA Rating",
+      "Fair-play decision"
+    ],
+    "ratingTitleA": "Universal OCA Rating",
+    "ratingTextA": "Existing scores are not merely repackaged. The standard calculates a comparable rating from verified results within the federated network.",
+    "ratingTitleB": "Collective integrity",
+    "ratingTextB": "Independent modules share signals. A network-wide measure is taken only when two or more signals concur, with a transparent appeal process before an independent Fair Play Commission."
+  },
+  "application": {
+    "title": "A digital protocol becomes a public resource only when people can use it.",
+    "intro": "The standard becomes meaningful in settings where access, health and public digital infrastructure converge.",
+    "items": [
+      [
+        "Libraries",
+        "Digital inclusion",
+        "Chess Club in a Box brings together online play and local interaction."
+      ],
+      [
+        "Care",
+        "Cognitive health",
+        "Accessible chess programmes support social connection and mental activity."
+      ],
+      [
+        "Europe",
+        "Digital sovereignty",
+        "Open standards align with public R&D, interoperability and the objectives of the Digital Markets Act."
+      ]
+    ]
+  },
+  "execution": {
+    "title": "From establishment to a global standard",
+    "intro": "Four successive phases build legal legitimacy, technical functionality and public application in a controlled manner.",
+    "phases": [
+      [
+        "Months 1–3",
+        "Establishment",
+        "Register a Belgian non-profit association (VZW) and sign the Founding Charter with core partners."
+      ],
+      [
+        "Months 4–9",
+        "Protocol development",
+        "Define API standards and the open reference implementation."
+      ],
+      [
+        "Months 10–15",
+        "Institutional pilots",
+        "Launch pilots in libraries and residential care homes in Flanders and the Netherlands."
+      ],
+      [
+        "Month 16 onwards",
+        "Public launch",
+        "Launch the OCA Rating worldwide and invite market participants to adopt the standard."
+      ]
+    ]
+  },
+  "assistant": {
+    "kicker": "Interactive reading guide",
+    "title": "Ask the report",
+    "text": "Ask a question in your own words. The answer draws exclusively on this publication, cites specific figures and timelines, and identifies what is not specified.",
+    "label": "Your question for the report",
+    "placeholder": "How does OCA preserve players' ownership of their data?",
+    "submit": "Ask a question",
+    "asking": "Consulting the report",
+    "consulting": "Consulting the report…",
+    "sendError": "Your question could not be sent. Please try again later.",
+    "suggestionsLabel": "Sample questions",
+    "suggestions": [
+      "How large is the market and how fast is it growing?",
+      "What happens at each stage of the roadmap?",
+      "How does a fair-play measure work?"
+    ]
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "meta": {
+    "title": "Strategischer Bericht — Open Chess Alliance",
+    "description": "Ein Konzept für digitale Souveränität durch offene Standards für Identität, Rating und Integrität im digitalen Schach.",
+    "reportTitle": "Offizieller Bericht (PDF-Ausgabe) — Open Chess Alliance",
+    "reportDescription": "Die vollständige, druckfähige Ausgabe des strategischen Berichts der Open Chess Alliance mit Inhaltsverzeichnis und allen Kapiteln.",
+    "locale": "de_DE"
+  },
+  "ui": {
+    "skip": "Zum Inhalt",
+    "nav": "Berichtsnavigation",
+    "contents": "Inhalt des Berichts",
+    "openMenu": "Inhaltsverzeichnis öffnen",
+    "closeMenu": "Inhaltsverzeichnis schließen",
+    "strategic": "Strategischer Bericht",
+    "ask": "Fragen an den Bericht",
+    "settings": "Darstellung und Sprache",
+    "theme": "Design",
+    "system": "System",
+    "light": "Hell",
+    "dark": "Dunkel",
+    "language": "Sprache",
+    "readSummary": "Zusammenfassung lesen",
+    "officialReport": "Offizieller Bericht",
+    "officialReportLead": "Lesen oder laden Sie die vollständige Ausgabe mit Inhaltsverzeichnis herunter.",
+    "downloadPdf": "Als PDF herunterladen",
+    "backToTop": "Nach oben ↑",
+    "footerLine": "Open Chess Alliance · Brüssel · Strategischer Bericht 2025",
+    "builtBy": "Architektur & Plattform von",
+    "backToSite": "Zurück zur Website",
+    "contentsTitle": "Inhaltsverzeichnis",
+    "edition": "Offizielle Ausgabe · Version 1.0 · Brüssel, 2025",
+    "printHint": "Wählen Sie im Druckdialog „Als PDF speichern“.",
+    "summaryLabel": "Zusammenfassung",
+    "colophonTitle": "Impressum",
+    "colophonText": "Herausgegeben von der Open Chess Alliance, Brüssel. Diese Ausgabe enthält den vollständigen Inhalt der Online-Publikation und darf unter Quellenangabe frei weitergegeben werden.",
+    "page": "Seite"
+  },
+  "cover": {
+    "meta1": "Strategischer Bericht / OCA–01",
+    "meta2": "Brüssel · 2025",
+    "org": "Open Chess Alliance",
+    "title": "Ein offener Standard für das digitale Schachspiel",
+    "lead": "Ein strategisches Konzept für portable Identität, vergleichbare Ratings und gemeinsame Integritätssicherung — ohne eine neue Plattform vorzugeben.",
+    "imageAlt": "Marmorschachbrett mit klassischen Schachfiguren"
+  },
+  "summary": {
+    "title": "Nicht noch eine Plattform. Sondern eine gemeinsame Basis.",
+    "lead": "Die digitale Schachwelt wächst, doch Identität, Reputation und Spieldaten bleiben in getrennten Systemen eingeschlossen.",
+    "items": [
+      [
+        "Problem",
+        "Getrennte Identitäten, Ratings und Integritätsentscheidungen schränken Vertrauen und Wahlfreiheit ein."
+      ],
+      [
+        "Vorschlag",
+        "Ein neutraler Standard verbindet bestehende Plattformen, ohne ihre Eigenständigkeit zu ersetzen."
+      ],
+      [
+        "Ergebnis",
+        "Die Kontrolle bleibt beim Spieler; Marktteilnehmer konkurrieren auf einer gemeinsamen Infrastruktur über Qualität."
+      ]
+    ]
+  },
+  "chapters": [
+    "Warum Handlungsbedarf besteht",
+    "Der offene Standard",
+    "Öffentliche Anwendung",
+    "Umsetzung"
+  ],
+  "context": {
+    "title": "Der Markt wächst. Das Vertrauen hält nicht Schritt.",
+    "intro": "Die Schachwirtschaft steuert auf eine Verdopplung zu, während Spielerprofile, Ratings und Reputation auf geschlossene Ökosysteme verteilt bleiben. Wachstum ohne Interoperabilität stärkt bestehende Torwächter.",
+    "stats": [
+      [
+        "Markt 2025",
+        "3,70 Mrd. US-Dollar"
+      ],
+      [
+        "Prognose 2032",
+        "7,64 Mrd. US-Dollar"
+      ],
+      [
+        "Jährliches Wachstum",
+        "10,91 % CAGR"
+      ]
+    ],
+    "problems": [
+      [
+        "Fragmentierung",
+        "Lichess, ChessBase und FIDE verwalten getrennte Identitäten, Ratings und Infrastrukturen."
+      ],
+      [
+        "Plattformgebundenes Eigentum",
+        "Spielhistorie, Kontakte und Reputation lassen sich heute nicht ohne Weiteres vom Spieler mitnehmen."
+      ],
+      [
+        "Marktmacht",
+        "Netzwerkeffekte begrenzen Wahlfreiheit, Innovation und eine gesunde digitale Schachkultur."
+      ]
+    ],
+    "conclusionKicker": "Strategische Schlussfolgerung",
+    "conclusion": "OCA wird keine vierte Plattform. OCA wird die neutrale Ebene, die bestehende Stärken verbindet."
+  },
+  "standard": {
+    "title": "Von getrennten Ökosystemen zu einem föderierten Protokoll",
+    "intro": "OCA übernimmt keine bestehenden Funktionen. OCA definiert die Regeln, nach denen bestehende Akteure Identität, Ergebnisse und Integritätsinformationen zuverlässig austauschen können.",
+    "rolesKicker": "2.1 / Rollen und Steuerung",
+    "rolesTitle": "Jeder Akteur bringt seine eigene Stärke ein.",
+    "roles": [
+      [
+        "OCA",
+        "Neutrale Steuerung",
+        "Verwaltet den Standard, prüft die Konformität und wahrt das gemeinsame Interesse."
+      ],
+      [
+        "Lichess",
+        "Technisches Rückgrat",
+        "Bringt Open-Source-Infrastruktur und Erfahrung mit öffentlichen APIs ein."
+      ],
+      [
+        "ChessBase",
+        "Professionelle Reichweite",
+        "Verbindet professionelle Nutzer, Partienarchive und kommerzielle Anwendungen."
+      ],
+      [
+        "FIDE",
+        "Institutionelle Legitimität",
+        "Verbindet den Standard mit dem organisierten Sport und offizieller Anerkennung."
+      ]
+    ],
+    "identityKicker": "2.2 / Identität und Daten",
+    "identityTitle": "Der Spieler bleibt die Vertrauensquelle.",
+    "identityText": "Eine Global_ID verbindet das vertraute Konto mit teilnehmenden Diensten. Persönliche Datentresore halten Historie und Einwilligungen unter der Kontrolle des Spielers.",
+    "flow": [
+      "Vertrautes Konto",
+      "Global_ID",
+      "Gezielte Einwilligung",
+      "Portable Historie",
+      "Verifiziertes Ergebnis",
+      "OCA Rating & Integrität"
+    ],
+    "quote": "„Wer die Identität besitzt, besitzt den Markt.“",
+    "quoteNote": "Deshalb gehört sie dem Spieler.",
+    "ratingKicker": "2.3 / Rating und Integrität",
+    "ratingTitle": "Vergleichbare Ergebnisse, überprüfbare Entscheidungen.",
+    "flowLabel": "Protokollablauf",
+    "ratingFlow": [
+      "Verifiziertes Ergebnis",
+      "OCA Rating",
+      "Fair-Play-Entscheidung"
+    ],
+    "ratingTitleA": "Universelles OCA Rating",
+    "ratingTextA": "Bestehende Wertungszahlen werden nicht bloß kosmetisch umgerechnet. Der Standard berechnet ein vergleichbares Rating aus verifizierten Ergebnissen innerhalb des föderierten Netzwerks.",
+    "ratingTitleB": "Gemeinsame Integritätssicherung",
+    "ratingTextB": "Unabhängige Module tauschen Signale aus. Eine netzwerkweite Maßnahme erfolgt erst bei Übereinstimmung von zwei oder mehr Signalen, mit einem transparenten Einspruchsverfahren vor einer unabhängigen Fair-Play-Kommission."
+  },
+  "application": {
+    "title": "Ein digitales Protokoll wird erst dann öffentlich nutzbar, wenn Menschen es anwenden können.",
+    "intro": "Der Standard entfaltet seinen Nutzen dort, wo Zugang, Gesundheit und öffentliche digitale Infrastruktur zusammenkommen.",
+    "items": [
+      [
+        "Bibliotheken",
+        "Digitale Inklusion",
+        "„Schachclub in einer Box“ verbindet Online-Spiel und Begegnungen vor Ort."
+      ],
+      [
+        "Gesundheits- und Pflegewesen",
+        "Kognitive Gesundheit",
+        "Zugängliche Schachprogramme fördern soziale Verbundenheit und geistige Aktivität."
+      ],
+      [
+        "Europa",
+        "Digitale Souveränität",
+        "Offene Standards stehen im Einklang mit öffentlicher Forschung und Entwicklung, Interoperabilität und den Zielen des Digital Markets Act."
+      ]
+    ]
+  },
+  "execution": {
+    "title": "Von der Gründung zum weltweiten Standard",
+    "intro": "Vier aufeinanderfolgende Phasen schaffen schrittweise rechtliche Legitimität, technische Funktionsfähigkeit und öffentliche Anwendung.",
+    "phases": [
+      [
+        "Monate 1–3",
+        "Gründung",
+        "Eine belgische Vereinigung ohne Gewinnerzielungsabsicht (VZW) registrieren und das Founding Charter mit den Kernpartnern unterzeichnen."
+      ],
+      [
+        "Monate 4–9",
+        "Protokollentwicklung",
+        "API-Standards und die offene Referenzimplementierung definieren."
+      ],
+      [
+        "Monate 10–15",
+        "Institutionelle Pilotprojekte",
+        "Pilotprojekte in Bibliotheken und Pflegeheimen in Flandern und den Niederlanden starten."
+      ],
+      [
+        "Ab Monat 16",
+        "Öffentliche Einführung",
+        "Das OCA Rating weltweit einführen und die Marktteilnehmer zur Einhaltung des Standards einladen."
+      ]
+    ]
+  },
+  "assistant": {
+    "kicker": "Interaktive Lesehilfe",
+    "title": "Fragen an den Bericht",
+    "text": "Stellen Sie eine frei formulierte Frage. Die Antwort stützt sich ausschließlich auf den Inhalt dieser Publikation, nennt konkrete Zahlen und Zeitrahmen und weist auf nicht näher spezifizierte Punkte hin.",
+    "label": "Ihre Frage an den Bericht",
+    "placeholder": "Wie wahrt OCA die Datenhoheit der Spieler?",
+    "submit": "Frage stellen",
+    "asking": "Bericht konsultieren",
+    "consulting": "Der Bericht wird konsultiert …",
+    "sendError": "Die Frage konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.",
+    "suggestionsLabel": "Beispielfragen",
+    "suggestions": [
+      "Wie groß ist der Markt und wie schnell wächst er?",
+      "Was geschieht in den einzelnen Phasen des Fahrplans?",
+      "Wie funktioniert eine Fair-Play-Maßnahme?"
+    ]
+  }
+}

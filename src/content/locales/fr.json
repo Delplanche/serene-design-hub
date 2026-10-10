@@ -1,0 +1,222 @@
+{
+  "meta": {
+    "title": "Rapport stratégique — Open Chess Alliance",
+    "description": "Une feuille de route pour la souveraineté numérique grâce à des standards ouverts d’identité, de classement et d’intégrité dans les échecs numériques.",
+    "reportTitle": "Rapport officiel (édition PDF) — Open Chess Alliance",
+    "reportDescription": "L’édition intégrale et imprimable du rapport stratégique de l’Open Chess Alliance, avec table des matières et tous les chapitres.",
+    "locale": "fr_BE"
+  },
+  "ui": {
+    "skip": "Aller au contenu",
+    "nav": "Navigation du rapport",
+    "contents": "Contenu du rapport",
+    "openMenu": "Ouvrir la table des matières",
+    "closeMenu": "Fermer la table des matières",
+    "strategic": "Rapport stratégique",
+    "ask": "Interroger le rapport",
+    "settings": "Affichage et langue",
+    "theme": "Thème",
+    "system": "Système",
+    "light": "Clair",
+    "dark": "Sombre",
+    "language": "Langue",
+    "readSummary": "Lire la synthèse",
+    "officialReport": "Rapport officiel",
+    "officialReportLead": "Consultez ou téléchargez l’édition intégrale avec table des matières.",
+    "downloadPdf": "Télécharger en PDF",
+    "backToTop": "Retour en haut ↑",
+    "footerLine": "Open Chess Alliance · Bruxelles · Rapport stratégique 2025",
+    "builtBy": "Architecture et plateforme par",
+    "backToSite": "Retour au site",
+    "contentsTitle": "Table des matières",
+    "edition": "Édition officielle · Version 1.0 · Bruxelles, 2025",
+    "printHint": "Sélectionnez « Enregistrer au format PDF » dans la fenêtre d’impression.",
+    "summaryLabel": "Synthèse",
+    "colophonTitle": "Mentions éditoriales",
+    "colophonText": "Publié par l’Open Chess Alliance, Bruxelles. Cette édition reprend l’intégralité de la publication en ligne et peut être partagée librement avec mention de la source.",
+    "page": "Page"
+  },
+  "cover": {
+    "meta1": "Rapport stratégique / OCA–01",
+    "meta2": "Bruxelles · 2025",
+    "org": "Open Chess Alliance",
+    "title": "Un standard ouvert pour les échecs numériques",
+    "lead": "Une feuille de route stratégique pour une identité portable, des classements comparables et une intégrité partagée — sans imposer une nouvelle plateforme.",
+    "imageAlt": "Échiquier en marbre avec des pièces classiques"
+  },
+  "summary": {
+    "title": "Pas une plateforme de plus. Un socle commun.",
+    "lead": "Le monde des échecs numériques se développe, mais l’identité, la réputation et les données de jeu restent enfermées dans des systèmes distincts.",
+    "items": [
+      [
+        "Problème",
+        "La séparation des identités, des classements et des décisions relatives à l’intégrité limite la confiance et le choix."
+      ],
+      [
+        "Proposition",
+        "Un standard neutre relie les plateformes existantes sans effacer leurs spécificités."
+      ],
+      [
+        "Résultat",
+        "Le joueur garde le contrôle ; les acteurs du marché se livrent concurrence sur la qualité, en s’appuyant sur une infrastructure commune."
+      ]
+    ]
+  },
+  "chapters": [
+    "Pourquoi agir",
+    "Le standard ouvert",
+    "Applications d’intérêt public",
+    "Mise en œuvre"
+  ],
+  "context": {
+    "title": "Le marché progresse. La confiance ne suit pas.",
+    "intro": "L’économie des échecs s’achemine vers un doublement, tandis que les profils, les classements et la réputation des joueurs restent répartis entre des écosystèmes fermés. Une croissance sans interopérabilité renforce les contrôleurs d’accès existants.",
+    "stats": [
+      [
+        "Marché en 2025",
+        "3,70 milliards $"
+      ],
+      [
+        "Prévision pour 2032",
+        "7,64 milliards $"
+      ],
+      [
+        "Croissance annuelle",
+        "10,91 % de TCAC"
+      ]
+    ],
+    "problems": [
+      [
+        "Fragmentation",
+        "Lichess, ChessBase et FIDE gèrent des identités, des classements et des infrastructures distincts."
+      ],
+      [
+        "Contrôle des plateformes",
+        "L’historique des parties, les contacts et la réputation ne suivent pas aujourd’hui automatiquement le joueur."
+      ],
+      [
+        "Pouvoir de marché",
+        "Les effets de réseau limitent le choix, l’innovation et une culture saine des échecs numériques."
+      ]
+    ],
+    "conclusionKicker": "Conclusion stratégique",
+    "conclusion": "OCA ne sera pas une quatrième plateforme. Elle sera le socle neutre qui relie les forces existantes."
+  },
+  "standard": {
+    "title": "D’écosystèmes isolés à un protocole fédéré commun",
+    "intro": "OCA ne reprend pas les fonctions des acteurs existants. Elle définit les règles leur permettant d’échanger de manière fiable des données d’identité, de résultats et d’intégrité.",
+    "rolesKicker": "2.1 / Rôles et pilotage",
+    "rolesTitle": "Chaque acteur apporte sa propre force.",
+    "roles": [
+      [
+        "OCA",
+        "Pilotage neutre",
+        "Gère le standard, vérifie la conformité et veille à l’intérêt commun."
+      ],
+      [
+        "Lichess",
+        "Socle technique",
+        "Apporte une infrastructure open source et une expérience des API publiques."
+      ],
+      [
+        "ChessBase",
+        "Rayonnement professionnel",
+        "Relie les utilisateurs professionnels, les archives de parties et les applications commerciales."
+      ],
+      [
+        "FIDE",
+        "Légitimité institutionnelle",
+        "Relie le standard au sport organisé et à la reconnaissance officielle."
+      ]
+    ],
+    "identityKicker": "2.2 / Identité et données",
+    "identityTitle": "Le joueur reste la source de confiance.",
+    "identityText": "Un Global_ID relie le compte de confiance aux services participants. Des coffres-forts de données personnelles conservent l’historique et les consentements sous le contrôle du joueur.",
+    "flow": [
+      "Compte de confiance",
+      "Global_ID",
+      "Consentement ciblé",
+      "Historique portable",
+      "Résultat vérifié",
+      "OCA Rating et intégrité"
+    ],
+    "quote": "« Qui détient l’identité détient le marché. »",
+    "quoteNote": "C’est pourquoi elle doit appartenir au joueur.",
+    "ratingKicker": "2.3 / Classement et intégrité",
+    "ratingTitle": "Des résultats comparables, des décisions vérifiables.",
+    "flowLabel": "Flux du protocole",
+    "ratingFlow": [
+      "Résultat vérifié",
+      "OCA Rating",
+      "Décision relative au fair-play"
+    ],
+    "ratingTitleA": "OCA Rating universel",
+    "ratingTextA": "Les scores existants ne font pas l’objet d’une simple conversion de façade. Le standard calcule un classement comparable à partir de résultats vérifiés au sein du réseau fédéré.",
+    "ratingTitleB": "Intégrité collective",
+    "ratingTextB": "Des modules indépendants partagent des signaux. Une mesure applicable à l’ensemble du réseau n’intervient qu’après convergence d’au moins deux signaux, avec une procédure de recours transparente devant une commission indépendante du fair-play."
+  },
+  "application": {
+    "title": "Un protocole numérique ne devient réellement public que lorsque chacun peut l’utiliser.",
+    "intro": "Le standard prend tout son sens dans des environnements où se rejoignent accès, santé et infrastructures numériques publiques.",
+    "items": [
+      [
+        "Bibliothèques",
+        "Inclusion numérique",
+        "Le « Club d’échecs en boîte » associe jeu en ligne et rencontres locales."
+      ],
+      [
+        "Soins",
+        "Santé cognitive",
+        "Des programmes d’échecs accessibles favorisent le lien social et l’activité mentale."
+      ],
+      [
+        "Europe",
+        "Souveraineté numérique",
+        "Les standards ouverts s’inscrivent dans la R&D publique, l’interopérabilité et les objectifs du Digital Markets Act."
+      ]
+    ]
+  },
+  "execution": {
+    "title": "De la création à un standard mondial",
+    "intro": "Quatre phases successives établissent progressivement la légitimité juridique, le fonctionnement technique et les applications d’intérêt public.",
+    "phases": [
+      [
+        "Mois 1–3",
+        "Création",
+        "Constituer une association sans but lucratif de droit belge (ASBL) et signer le Founding Charter avec les partenaires clés."
+      ],
+      [
+        "Mois 4–9",
+        "Développement du protocole",
+        "Définir les standards d’API et l’implémentation de référence ouverte."
+      ],
+      [
+        "Mois 10–15",
+        "Projets pilotes institutionnels",
+        "Lancer des projets pilotes dans les bibliothèques et les établissements résidentiels de soins en Flandre et aux Pays-Bas."
+      ],
+      [
+        "À partir du mois 16",
+        "Lancement public",
+        "Lancer OCA Rating à l’échelle mondiale et inviter les acteurs du marché à se conformer au standard."
+      ]
+    ]
+  },
+  "assistant": {
+    "kicker": "Aide interactive à la lecture",
+    "title": "Interroger le rapport",
+    "text": "Posez une question librement. La réponse s’appuie exclusivement sur cette publication, cite des chiffres et des échéances précis et indique ce qui n’est pas spécifié.",
+    "label": "Votre question au rapport",
+    "placeholder": "Comment OCA préserve-t-elle la propriété des données des joueurs ?",
+    "submit": "Poser la question",
+    "asking": "Consulter le rapport",
+    "consulting": "Consultation du rapport en cours…",
+    "sendError": "La question n’a pas pu être envoyée. Veuillez réessayer plus tard.",
+    "suggestionsLabel": "Exemples de questions",
+    "suggestions": [
+      "Quelle est la taille du marché et à quel rythme progresse-t-il ?",
+      "Que se passe-t-il à chaque phase de la feuille de route ?",
+      "Comment fonctionne une mesure relative au fair-play ?"
+    ]
+  }
+}
