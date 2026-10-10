@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RapportRouteImport } from './routes/rapport'
+import { Route as LangIndexRouteImport } from './routes/$lang.index'
+import { Route as LangRapportRouteImport } from './routes/$lang.rapport'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RapportRoute = RapportRouteImport.update({
+  id: '/rapport',
+  path: '/rapport',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LangIndexRoute = LangIndexRouteImport.update({
+  id: '/$lang/',
+  path: '/$lang/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LangRapportRoute = LangRapportRouteImport.update({
+  id: '/$lang/rapport',
+  path: '/$lang/rapport',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/rapport': typeof RapportRoute
+  '/$lang/rapport': typeof LangRapportRoute
+  '/$lang/': typeof LangIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/rapport': typeof RapportRoute
+  '/$lang/rapport': typeof LangRapportRoute
+  '/$lang': typeof LangIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/rapport': typeof RapportRoute
+  '/$lang/rapport': typeof LangRapportRoute
+  '/$lang/': typeof LangIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/rapport' | '/$lang/rapport' | '/$lang/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/rapport' | '/$lang/rapport' | '/$lang'
+  id: '__root__' | '/' | '/rapport' | '/$lang/rapport' | '/$lang/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  RapportRoute: typeof RapportRoute
+  LangRapportRoute: typeof LangRapportRoute
+  LangIndexRoute: typeof LangIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/rapport': {
+      id: '/rapport'
+      path: '/rapport'
+      fullPath: '/rapport'
+      preLoaderRoute: typeof RapportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$lang/': {
+      id: '/$lang/'
+      path: '/$lang'
+      fullPath: '/$lang/'
+      preLoaderRoute: typeof LangIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$lang/rapport': {
+      id: '/$lang/rapport'
+      path: '/$lang/rapport'
+      fullPath: '/$lang/rapport'
+      preLoaderRoute: typeof LangRapportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  RapportRoute: RapportRoute,
+  LangRapportRoute: LangRapportRoute,
+  LangIndexRoute: LangIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
